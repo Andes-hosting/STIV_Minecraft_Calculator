@@ -1,0 +1,96 @@
+.componente {
+    display:grid;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    height: auto;
+}
+
+#componenteInicial{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    height: auto;
+    width: 300px;
+}
+
+#agregarComponente{
+    width: 50px;
+}
+
+#contenedor{
+    display: block;
+}
+
+.tarjeta{
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: auto;
+    text-align: left;
+    background-color: #4643433b;
+    margin-bottom: 20px;
+}
+
+h2{
+    text-align: center;
+    font-size: auto;
+}
+
+.etiquetas {
+    margin: 10px 0;
+}
+
+input{
+    margin-right: 5px;
+}
+
+.actualizar{
+    background-color: aqua;
+}
+
+.texto {
+    text-align: left;
+    display: block;
+}
+
+button{
+    margin: 20px;
+}
+
+#totalLabel{
+    font-size: 50px;
+    background-color: aquamarine;
+}
+
+/*
+#nuevasCotizaciones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+input, .subtotal{
+    
+    align-items: end;
+}
+
+.texto {
+    text-align: left;
+    display: block;
+}
+
+#ramLabel,#puertosLabel,#backupLabel,#bdLabel,#almacenamientoLabel {
+    background-color: aqua;
+    display: inline-block;
+}
+
+.componente2{
+    height: 50px;
+}
+
+
+.boton{
+    float: right;
+} 
