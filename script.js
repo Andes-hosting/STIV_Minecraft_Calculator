@@ -15,16 +15,40 @@ function calcularTotal(){
     var e = document.getElementById("primerdescuento");
     var discount1 = e.value;
 
+    var e = document.getElementById("primerdescuento");
+    var discount1 = e.value;
+
+    e = document.getElementById("segundodescuento");
+    var discount2 = e.value;
+
     subtotales.forEach(function(label){
         aux = label.textContent;
         aux = aux.slice(1);
         total += parseFloat(aux);
     });
-    total=total*(1-(discount1/100))
+
+    var months=0;
+    if (discount2==20)
+        months=1;
+    else if (discount2==50)
+        months=3;
+    else
+        months=12;
+
+    total=total*(1-(discount1/100));
+    total=total*(1-(discount2/100));
+
+    var valueMonth = total;
+    //problemas con los decimales en el caso 10 en almacenamiento, 50% en primer descuento y 1 año en segundo descuento
+    console.log(total);
+
+    valueMonth = parseFloat(valueMonth).toFixed(2);
+
+    total=total*months;
     total=parseFloat(total).toFixed(2);
-    total="$"+total+" Descuento: "+discount1+"%"
+    total="$"+total+". Cada mes se pagaría: $"+valueMonth+". Primer Descuento: "+discount1+"%. Segundo Descuento: "+discount2+"%.";
     
-    document.getElementById("totalLabel").textContent="Total: "+total; 
+    document.getElementById("totalLabel").textContent="Total para "+months+" mes(es): "+total; 
 }
 
 //Función base que crea el componente de cada tarjeta
