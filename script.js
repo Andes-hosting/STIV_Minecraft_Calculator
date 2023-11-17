@@ -12,13 +12,17 @@ function actualizarEtiqueta(input, label) {
 function calcularTotal(){
     const subtotales = document.querySelectorAll(".actualizar");
     let total = 0;
+    var e = document.getElementById("primerdescuento");
+    var discount1 = e.value;
 
     subtotales.forEach(function(label){
         aux = label.textContent;
         aux = aux.slice(1);
         total += parseFloat(aux);
     });
-    total="$"+total+".00"
+    total=total*(1-(discount1/100))
+    total=parseFloat(total).toFixed(2);
+    total="$"+total+" Descuento: "+discount1+"%"
     
     document.getElementById("totalLabel").textContent="Total: "+total; 
 }
@@ -32,27 +36,27 @@ function crearComponente() {
         <h2>Calculadora</h2>
         <div class="etiquetas">
             <label class="texto">Almacenamiento (GB) :</label>
-            <input type="number" id="almacenamiento">
+            <input type="number" id="almacenamiento" min=0>
             <label class="actualizar" id="almacenamientoLabel">$0.00</label>
         </div>
         <div class="etiquetas">
             <label class="texto">Bases de Datos:</label>
-            <input type="number" id="bd">
+            <input type="number" id="bd" min=0>
             <label class="actualizar" id="bdLabel">$0.00</label>
         </div>
         <div class="etiquetas">
             <label class="texto">Backup:</label>
-            <input type="number" id="backup">
+            <input type="number" id="backup" min=0>
             <label class="actualizar" id="backupLabel">$0.00</label>
         </div>
         <div class="etiquetas">
             <label class="texto">Puertos:</label>
-            <input type="number" id="puertos">
+            <input type="number" id="puertos" min=0>
             <label class="actualizar" id="puertosLabel">$0.00</label>
         </div>
         <div class="etiquetas">
             <label class="texto">RAM (GB):</label>
-            <input type="number" id="ram">
+            <input type="number" id="ram" min=0>
             <label class="actualizar" id="ramLabel">$0.00</label>
         </div>
     `;
@@ -78,4 +82,10 @@ document.getElementById("agregarComponente").addEventListener("click", function(
     contenedor.appendChild(nuevoComponente);
 });
 
+//primer descuento
+const cambio=()=>{
+    console.log("Cambio")
+
+}
+const select=document.querySelectorAll("#primerdescuento")
 document.getElementById("calcularTotal").addEventListener("click",calcularTotal);
