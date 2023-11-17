@@ -12,6 +12,8 @@ function actualizarEtiqueta(input, label) {
 function calcularTotal(){
     const subtotales = document.querySelectorAll(".actualizar");
     let total = 0;
+    var e = document.getElementById("primerdescuento");
+    var discount1 = e.value;
 
     var e = document.getElementById("primerdescuento");
     var discount1 = e.value;
