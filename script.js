@@ -38,6 +38,8 @@ function calcularTotal(){
     total=total*(1-(discount1/100));
     total=total*(1-(discount2/100));
 
+    total=total.toFixed(6)
+
     var valueMonth = total;
     //problemas con los decimales en el caso 10 en almacenamiento, 50% en primer descuento y 1 año en segundo descuento
     console.log(total);
