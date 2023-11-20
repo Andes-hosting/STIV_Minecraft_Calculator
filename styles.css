@@ -1,5 +1,6 @@
 .componente {
-    display:grid;
+    display:flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     justify-items: center;
@@ -30,6 +31,7 @@
     text-align: left;
     background-color: #4643433b;
     margin-bottom: 20px;
+    position: relative;
 }
 
 h2{
@@ -59,8 +61,24 @@ button{
 }
 
 #totalLabel{
+    padding: 5px,10px;
     font-size: 50px;
     background-color: aquamarine;
+}
+
+.close{
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.close:hover{
+    background-color: #c0392b;
 }
 
 /*
