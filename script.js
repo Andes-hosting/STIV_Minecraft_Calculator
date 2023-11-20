@@ -38,6 +38,8 @@ function calcularTotal(){
     total=total*(1-(discount1/100));
     total=total*(1-(discount2/100));
 
+    total=total.toFixed(6)
+
     var valueMonth = total;
     //problemas con los decimales en el caso 10 en almacenamiento, 50% en primer descuento y 1 año en segundo descuento
     console.log(total);
@@ -52,7 +54,7 @@ function calcularTotal(){
 }
 
 //Función base que crea el componente de cada tarjeta
-function crearComponente() {
+function crearComponente(cerrar = true) {
     // Crear el componente
     const componente = document.createElement("div");
     componente.className = "tarjeta";
@@ -85,6 +87,17 @@ function crearComponente() {
         </div>
     `;
 
+    //agregar botón par borrar componente
+    if(cerrar){
+        const botonCerrar = document.createElement("button");
+        botonCerrar.className = "close";
+        botonCerrar.textContent = "X";
+        botonCerrar.addEventListener("click", function(){
+            borrarComponente(componente);
+        });
+        componente.appendChild(botonCerrar);
+    }
+
     // Configurar eventos para las etiquetas independientes de este componente
     const inputs = componente.querySelectorAll("input");
     const labels = componente.querySelectorAll(".actualizar");
@@ -97,7 +110,7 @@ function crearComponente() {
 }
 
 // Agregar un componente inicial
-const componenteInicial = crearComponente();
+const componenteInicial = crearComponente(false);
 document.getElementById("componenteInicial").appendChild(componenteInicial);
 
 document.getElementById("agregarComponente").addEventListener("click", function() {
@@ -105,6 +118,12 @@ document.getElementById("agregarComponente").addEventListener("click", function(
     const nuevoComponente = crearComponente();
     contenedor.appendChild(nuevoComponente);
 });
+
+//Borrar componente
+function borrarComponente(componente){
+    componente.remove();
+    calcularTotal();
+}
 
 //primer descuento
 const cambio=()=>{
