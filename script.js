@@ -1,10 +1,57 @@
-//const almacenamiento123 = 200;
+//Valores de los componentes del servidor en pesos chilenos
+const clp = {
+    'almacenamiento': 100,
+    'bd': 200,
+    'backup': 1000,
+    'puertos': 500,
+    'ram': 1500,
+}
+//Valores de los componentes del servidor en dolares
+const usd = {
+    'almacenamiento': 0.11,
+    'bd': 0.22,
+    'backup': 1.11,
+    'puertos': 0.56,
+    'ram': 1.67,
+}
+//Cantidad base de cada uno de los componentes del servidor
+const base = {
+    'almacenamiento': 4,
+    'bd': 0,
+    'backup': 0,
+    'puertos': 1,
+    'ram': 1,//dudoso
+}
+//Valores especiales de la ram
+const ram = {
+    '1':2000,//clp
+    '2':50,
+    '3':1500,
+    '4':2.22,//usd
+    '5':0.055,
+    '6':1.67,
+}
 
 //Función que actualiza los precios en relación al input numerico
 function actualizarEtiqueta(input, label) {
     return function() {
-        aux = Number(input.value) + 1;
-        label.textContent = "$"+aux+".00";
+        item = input.getAttribute('id');
+        unitario = Number(input.value);
+        subtotal = 0
+        if(item == 'ram'){
+            if(unitario === 1)
+                subtotal = ram[1];
+            else if(unitario <12)
+                subtotal = (ram[1]-ram[2]*(unitario-2))*unitario;
+            else
+                subtotal = ram[3]*unitario;
+        } else if(true){
+            //Formula para calcular el valor de cada componente del servidor que no sea la ram
+            subtotal = unitario <= base[item] ? 0 : (unitario-base[item])*clp[item];
+        }
+
+        //Se actualiza la label con el valor calculado arriba
+        label.textContent = "$"+subtotal+".00";
     };
 }
 
