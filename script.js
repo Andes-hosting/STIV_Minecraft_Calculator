@@ -41,8 +41,6 @@ function calcularTotal(){
     total=total.toFixed(6)
 
     var valueMonth = total;
-    //problemas con los decimales en el caso 10 en almacenamiento, 50% en primer descuento y 1 año en segundo descuento
-    console.log(total);
 
     valueMonth = parseFloat(valueMonth).toFixed(2);
 
