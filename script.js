@@ -32,27 +32,55 @@ const ram = {
     '6':1.67,
 }
 
+let currency = "clp"
+
 //Función que actualiza los precios en relación al input numerico
 function actualizarEtiqueta(input, label) {
     return function() {
         item = input.getAttribute('id');
         unitario = Number(input.value);
         subtotal = 0
+        moneda = currency === "clp" ? clp : usd
+        optionsRam = currency === "clp" ? [ram[1],ram[2],ram[3]] : [ram[4],ram[5],ram[6]];
+        //console.log(moneda);
         if(item == 'ram'){
             if(unitario === 1)
-                subtotal = ram[1];
+                subtotal = optionsRam[0];
             else if(unitario <12)
-                subtotal = (ram[1]-ram[2]*(unitario-2))*unitario;
+                subtotal = (optionsRam[0]-optionsRam[1]*(unitario-2))*unitario;
             else
-                subtotal = ram[3]*unitario;
+                subtotal = optionsRam[2]*unitario;
         } else if(true){
             //Formula para calcular el valor de cada componente del servidor que no sea la ram
-            subtotal = unitario <= base[item] ? 0 : (unitario-base[item])*clp[item];
+            subtotal = unitario <= base[item] ? 0 : (unitario-base[item])*moneda[item];
         }
 
         //Se actualiza la label con el valor calculado arriba
         label.textContent = "$"+subtotal+".00";
     };
+}
+
+function actualizarEtiqueta2(input, label) {
+        item = input.getAttribute('id');
+        unitario = Number(input.value);
+        subtotal = 0
+        moneda = currency === "clp" ? clp : usd
+        optionsRam = currency === "clp" ? [ram[1],ram[2],ram[3]] : [ram[4],ram[5],ram[6]];
+        //console.log(moneda);
+        if(item == 'ram'){
+            if(unitario === 1)
+                subtotal = optionsRam[0];
+            else if(unitario <12)
+                subtotal = (optionsRam[0]-optionsRam[1]*(unitario-2))*unitario;
+            else
+                subtotal = optionsRam[2]*unitario;
+        } else if(true){
+            //Formula para calcular el valor de cada componente del servidor que no sea la ram
+            subtotal = unitario <= base[item] ? 0 : (unitario-base[item])*moneda[item];
+        }
+
+        //Se actualiza la label con el valor calculado arriba
+        label.textContent = "$"+subtotal+".00";
 }
 
 //Función que calcula el valor total de todos los subtotales de los componentes
@@ -96,6 +124,22 @@ function calcularTotal(){
     total="$"+total+". Cada mes se pagaría: $"+valueMonth+". Primer Descuento: "+discount1+"%. Segundo Descuento: "+discount2+"%.";
     
     document.getElementById("totalLabel").textContent="Total para "+months+" mes(es): "+total; 
+}
+
+function changeLabelCurrency(){
+    const labels = document.querySelectorAll(".actualizar");
+    const inputs = document.querySelectorAll("input");
+
+    for (i = 0; i < inputs.length; i++){
+        actualizarEtiqueta2(inputs[i], labels[i])
+    }    
+}
+
+function changeCurrency(){
+    currency = document.getElementById("currency").value;
+
+    changeLabelCurrency();
+    calcularTotal();
 }
 
 //Función base que crea el componente de cada tarjeta
@@ -177,3 +221,6 @@ const cambio=()=>{
 }
 const select=document.querySelectorAll("#primerdescuento")
 document.getElementById("calcularTotal").addEventListener("click",calcularTotal);
+
+
+document.getElementById("currency").addEventListener("change", changeCurrency);
