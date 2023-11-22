@@ -224,3 +224,13 @@ document.getElementById("calcularTotal").addEventListener("click",calcularTotal)
 
 
 document.getElementById("currency").addEventListener("change", changeCurrency);
+
+Intl.DateTimeFormat().resolvedOptions().timeZone === "America/Santiago" ? null : setCurrency();
+
+function setCurrency(){
+    chileanPesos = document.getElementById("clp");
+    dollar = document.getElementById("usd");
+    chileanPesos.removeAttribute("selected");
+    dollar.setAttribute("selected","");
+    currency="usd";
+}
