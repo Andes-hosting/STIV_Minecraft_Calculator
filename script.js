@@ -180,32 +180,32 @@ function crearComponente(cerrar = true) {
                 <option>Technic</option>
                 <option>VanillaCord</option>
                 <option>Bungeecord</option>
-                <option>Vanilla Minecraft</option>
+                <option selected>Vanilla Minecraft</option>
             </select>
         </div>
         <div class="etiquetas">
             <label class="texto">Almacenamiento (GB) :</label>
-            <input type="number" id="almacenamiento" min=0>
+            <input type="number" id="almacenamiento" min=0 value="4">
             <label class="actualizar" id="almacenamientoLabel">$0.00</label>
         </div>
         <div class="etiquetas">
             <label class="texto">Bases de Datos:</label>
-            <input type="number" id="bd" min=0>
+            <input type="number" id="bd" min=0 value="0">
             <label class="actualizar" id="bdLabel">$0.00</label>
         </div>
         <div class="etiquetas">
             <label class="texto">Backup:</label>
-            <input type="number" id="backup" min=0>
+            <input type="number" id="backup" min=0 value="0">
             <label class="actualizar" id="backupLabel">$0.00</label>
         </div>
         <div class="etiquetas">
             <label class="texto">Puertos:</label>
-            <input type="number" id="puertos" min=0>
+            <input type="number" id="puertos" min=0 value="1">
             <label class="actualizar" id="puertosLabel">$0.00</label>
         </div>
         <div class="etiquetas">
             <label class="texto">RAM (GB):</label>
-            <input type="number" id="ram" min=0>
+            <input type="number" id="ram" min=0 value="1">
             <label class="actualizar" id="ramLabel">$0.00</label>
         </div>
     `;
@@ -232,35 +232,13 @@ function crearComponente(cerrar = true) {
     return componente;
 }
 
-// Agregar un componente inicial
-const componenteInicial = crearComponente(false);
-document.getElementById("componenteInicial").appendChild(componenteInicial);
-
-document.getElementById("agregarComponente").addEventListener("click", function() {
-    const contenedor = document.getElementById("contenedor");
-    const nuevoComponente = crearComponente();
-    contenedor.appendChild(nuevoComponente);
-});
-
 //Borrar componente
 function borrarComponente(componente){
     componente.remove();
     calcularTotal();
 }
 
-//primer descuento
-const cambio=()=>{
-    console.log("Cambio")
-
-}
-const select=document.querySelectorAll("#primerdescuento")
-document.getElementById("calcularTotal").addEventListener("click",calcularTotal);
-
-
-document.getElementById("currency").addEventListener("change", changeCurrency);
-
-Intl.DateTimeFormat().resolvedOptions().timeZone === "America/Santiago" ? null : setCurrency();
-
+// funcion para establecer la moneda seleccionada al principio del ingreso a la página
 function setCurrency(){
     chileanPesos = document.getElementById("clp");
     dollar = document.getElementById("usd");
@@ -268,3 +246,31 @@ function setCurrency(){
     dollar.setAttribute("selected","");
     currency="usd";
 }
+
+//Pone en order las funciones llamadas al inicio de la página
+function main(){
+    // Agregar un componente inicial
+    const componenteInicial = crearComponente(false);
+    document.getElementById("componenteInicial").appendChild(componenteInicial);
+    // Escucha los evento de click en el boton + para agregar otro componente
+    document.getElementById("agregarComponente").addEventListener("click", function() {
+        const contenedor = document.getElementById("contenedor");
+        const nuevoComponente = crearComponente();
+        contenedor.appendChild(nuevoComponente);
+    });
+    // Identifica si el usuario es de chile y si es, define la moneda por defecto como clp
+    Intl.DateTimeFormat().resolvedOptions().timeZone === "America/Santiago" ? null : setCurrency();
+
+    // Actualizar etiquetas al inicio para los valores bases de cada item
+    const inputs2 = document.querySelectorAll("input");
+    const labels2 = document.querySelectorAll(".actualizar");
+    for (let i = 0; i < inputs2.length; i++) {
+        actualizarEtiqueta2(inputs2[i], labels2[i]);
+    }
+    // Escucha los eventos de cambio de moneda
+    document.getElementById("currency").addEventListener("change", changeCurrency);
+    // Escucha los evento de click en el boton de calcular total
+    document.getElementById("calcularTotal").addEventListener("click",calcularTotal);
+}
+
+main();
