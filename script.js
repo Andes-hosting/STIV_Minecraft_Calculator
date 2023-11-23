@@ -150,6 +150,40 @@ function crearComponente(cerrar = true) {
     componente.innerHTML = `
         <h2>Calculadora</h2>
         <div class="etiquetas">
+            <label class="texto">Servidor Minecraft :</label>
+            <select>
+                <option>Bedrock</option>
+                <option>gomint</option>
+                <option>LiteLoaderBDS</option>
+                <option>Nukkit</option>
+                <option>PocketMine MP</option>
+                <option>Cuberite</option>
+                <option>CurseForge</option>
+                <option>Fabric</option>
+                <option>Feather</option>
+                <option>Forge</option>
+                <option>Feed The Beast</option>
+                <option>Glowstone</option>
+                <option>Limbo</option>
+                <option>Krypton</option>
+                <option>Magma</option>
+                <option>Modrinth</option>
+                <option>Mohist</option>
+                <option>NanoLimbo</option>
+                <option>Paper</option>
+                <option>Folia</option>
+                <option>Purpur</option>
+                <option>Quilt</option>
+                <option>Spigot</option>
+                <option>SpongeForge</option>
+                <option>SpongeVanilla</option>
+                <option>Technic</option>
+                <option>VanillaCord</option>
+                <option>Bungeecord</option>
+                <option>Vanilla Minecraft</option>
+            </select>
+        </div>
+        <div class="etiquetas">
             <label class="texto">Almacenamiento (GB) :</label>
             <input type="number" id="almacenamiento" min=0>
             <label class="actualizar" id="almacenamientoLabel">$0.00</label>
