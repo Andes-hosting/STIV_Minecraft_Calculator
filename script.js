@@ -152,35 +152,39 @@ function crearComponente(cerrar = true) {
         <div class="etiquetas">
             <label class="texto">Servidor Minecraft :</label>
             <select>
-                <option>Bedrock</option>
-                <option>gomint</option>
-                <option>LiteLoaderBDS</option>
-                <option>Nukkit</option>
-                <option>PocketMine MP</option>
-                <option>Cuberite</option>
-                <option>CurseForge</option>
-                <option>Fabric</option>
-                <option>Feather</option>
-                <option>Forge</option>
-                <option>Feed The Beast</option>
-                <option>Glowstone</option>
-                <option>Limbo</option>
-                <option>Krypton</option>
-                <option>Magma</option>
-                <option>Modrinth</option>
-                <option>Mohist</option>
-                <option>NanoLimbo</option>
-                <option>Paper</option>
-                <option>Folia</option>
-                <option>Purpur</option>
-                <option>Quilt</option>
-                <option>Spigot</option>
-                <option>SpongeForge</option>
-                <option>SpongeVanilla</option>
-                <option>Technic</option>
-                <option>VanillaCord</option>
-                <option>Bungeecord</option>
-                <option selected>Vanilla Minecraft</option>
+                <optgroup label="Bedrock">
+                    <option>Bedrock</option>
+                    <option>gomint</option>
+                    <option>LiteLoaderBDS</option>
+                    <option>Nukkit</option>
+                    <option>PocketMine MP</option>
+                </optgroup>
+                <optgroup label="Java">
+                    <option>Bungeecord</option>
+                    <option>Cuberite</option>
+                    <option>CurseForge</option>
+                    <option>Fabric</option>
+                    <option>Feather</option>
+                    <option>Forge</option>
+                    <option>Feed The Beast</option>
+                    <option>Glowstone</option>
+                    <option>Limbo</option>
+                    <option>Krypton</option>
+                    <option>Magma</option>
+                    <option>Modrinth</option>
+                    <option>Mohist</option>
+                    <option>NanoLimbo</option>
+                    <option>Paper</option>
+                    <option>Folia</option>
+                    <option>Purpur</option>
+                    <option>Quilt</option>
+                    <option>Spigot</option>
+                    <option>SpongeForge</option>
+                    <option>SpongeVanilla</option>
+                    <option>Technic</option>
+                    <option>VanillaCord</option>                
+                    <option selected>Vanilla Minecraft</option>
+                </optgroup>
             </select>
         </div>
         <div class="etiquetas">
