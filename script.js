@@ -4,7 +4,7 @@ const clp = {
     'bd': 200,
     'backup': 1000,
     'puertos': 500,
-    'ram': 1500,
+    'ram': 1500
 }
 //Valores de los componentes del servidor en dolares
 const usd = {
@@ -12,7 +12,7 @@ const usd = {
     'bd': 0.22,
     'backup': 1.11,
     'puertos': 0.56,
-    'ram': 1.67,
+    'ram': 1.67
 }
 //Cantidad base de cada uno de los componentes del servidor
 const base = {
@@ -20,7 +20,7 @@ const base = {
     'bd': 0,
     'backup': 0,
     'puertos': 1,
-    'ram': 1,//dudoso
+    'ram': 1
 }
 //Valores especiales de la ram
 const ram = {
@@ -29,7 +29,13 @@ const ram = {
     '3':1500,
     '4':2.22,//usd
     '5':0.055,
-    '6':1.67,
+    '6':1.67
+}
+
+const discounts = {
+    '0':1,
+    '4.5':3,
+    '10':12
 }
 
 let currency = "clp"
@@ -87,14 +93,12 @@ function actualizarEtiqueta2(input, label) {
 function calcularTotal(){
     const subtotales = document.querySelectorAll(".actualizar");
     let total = 0;
-    var e = document.getElementById("primerdescuento");
-    var discount1 = e.value;
 
-    var e = document.getElementById("primerdescuento");
-    var discount1 = e.value;
+    let e = document.getElementById("primerdescuento");
+    let discount1 = e.value;
 
     e = document.getElementById("segundodescuento");
-    var discount2 = e.value;
+    let discount2 = e.value;
 
     subtotales.forEach(function(label){
         aux = label.textContent;
@@ -102,13 +106,9 @@ function calcularTotal(){
         total += parseFloat(aux);
     });
 
-    var months=0;
-    if (discount2==20)
-        months=1;
-    else if (discount2==50)
-        months=3;
-    else
-        months=12;
+    let months = discounts[discount2];
+    console.log(discount2);
+    console.log(months);
 
     total=total*(1-(discount1/100));
     total=total*(1-(discount2/100));
