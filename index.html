@@ -4,6 +4,7 @@
     <title>Calculadora</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
 </head>
 <body>
     <div>
@@ -21,7 +22,7 @@
         <button id="agregarComponente">+</button>
 
         <!-- Primer descuento(personalizado) -->
-        <div class="descuentoPersonalizado">            
+        <!-- <div class="descuentoPersonalizado">            
             <label for="PrimerDescuento">Primer Descuento</label>
                 <select id="primerdescuento">
                     <option value="0">0%</option>
@@ -36,7 +37,7 @@
                     <option value="90">90%</option>
                     <option value="100">100%</option>
                 </select>            
-        </div>
+        </div> -->
 
         <!-- Segundo descuento(1mes,3meses,1año) -->
         <div class="descuentoTiempo">            
@@ -51,6 +52,8 @@
       
         <button id="calcularTotal">Calcular Total</button>
         <div id="totalLabel">Total: $0.00</div>
+
+        <button id="excel">Descargar calculo en excel</button>
         
     </div>
 
