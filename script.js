@@ -148,14 +148,8 @@ function crearComponente(cerrar = true) {
         <div class="etiquetas">
             <label class="textoS">Servidor Minecraft :</label>
             <select class="versions">
-                <optgroup label="Bedrock">
-                    <option value="Bedrock-Bedrock">Bedrock</option>
-                    <option value="Bedrock-gomint">gomint</option>
-                    <option value="Bedrock-LiteLoaderBDS">LiteLoaderBDS</option>
-                    <option value="Bedrock-Nukkit">Nukkit</option>
-                    <option value="Bedrock-PocketMine">PocketMine MP</option>
-                </optgroup>
-                <optgroup label="Java">
+                <optgroup label="Minecraft Java">
+                    <option value="Java-Java Vanilla" selected>Java Vanilla</option>
                     <option value="Java-Bungeecord">Bungeecord</option>
                     <option value="Java-Cuberite">Cuberite</option>
                     <option value="Java-CurseForge">CurseForge</option>
@@ -175,12 +169,19 @@ function crearComponente(cerrar = true) {
                     <option value="Java-Purpur">Purpur</option>
                     <option value="Java-Quilt">Quilt</option>
                     <option value="Java-Spigot">Spigot</option>
-                    <option value="Java-SpongeForge">SpongeForge</option>
+                    <option value="Java-SpongeForge" disabled>SpongeForge</option>
                     <option value="Java-SpongeVanilla">SpongeVanilla</option>
                     <option value="Java-Technic">Technic</option>
-                    <option value="Java-VanillaCord">VanillaCord</option>                
-                    <option value="Java-Vanilla Minecraft" selected>Vanilla Minecraft</option>
+                    <option value="Java-VanillaCord">VanillaCord</option>
                 </optgroup>
+                <optgroup label="Minecraft Bedrock">
+                    <option value="Bedrock-Bedrock Vanilla">Bedrock Vanilla</option>
+                    <option value="Bedrock-gomint">gomint</option>
+                    <option value="Bedrock-LiteLoaderBDS">LiteLoaderBDS</option>
+                    <option value="Bedrock-Nukkit">Nukkit</option>
+                    <option value="Bedrock-PocketMine">PocketMine MP</option>
+                </optgroup>
+                
             </select>
         </div>
         <div class="etiquetas">
