@@ -181,7 +181,6 @@ function crearComponente(cerrar = true) {
                     <option value="Bedrock-Nukkit">Nukkit</option>
                     <option value="Bedrock-PocketMine">PocketMine MP</option>
                 </optgroup>
-                
             </select>
         </div>
         <div class="etiquetas">
