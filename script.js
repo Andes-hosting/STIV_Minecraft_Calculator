@@ -47,21 +47,33 @@ function actualizarEtiqueta(input, label, sub) {
         unitario = Number(input.value);
         subtotal = 0
         moneda = currency === "clp" ? clp : usd
-        optionsRam = currency === "clp" ? [ram[1],ram[2],ram[3]] : [ram[4],ram[5],ram[6]];
-        //console.log(moneda);
+        optionsRam = currency === "clp" ? [ram[1], ram[2], ram[3]] : [ram[4], ram[5], ram[6]];
         if(item == 'ram'){
             if(unitario === 1)
                 subtotal = optionsRam[0];
-            else if(unitario <12)
-                subtotal = (optionsRam[0]-optionsRam[1]*(unitario-2))*unitario;
-            else
-                subtotal = optionsRam[2]*unitario;
+            else if(unitario < 12){
+                subtotal = unitario - 2;
+                subtotal = subtotal * optionsRam[1];                
+                subtotal = optionsRam[0] - subtotal;                
+                subtotal = subtotal * unitario;
+                subtotal = subtotal.toFixed(2);                
+            }else{
+                subtotal = optionsRam[2] * unitario;
+                subtotal = subtotal.toFixed(2);
+            }
         } else if(true){
             //Formula para calcular el valor de cada componente del servidor que no sea la ram
-            subtotal = unitario <= base[item] ? 0 : (unitario-base[item])*moneda[item];
+            if(unitario <= base[item]){
+                subtotal = 0;
+            } else{
+                subtotal = unitario - base[item];                
+                subtotal = subtotal * moneda[item];
+                subtotal = subtotal.toFixed(2);
+            }
         }
+        
         //Se actualiza la label con el valor calculado arriba
-        label.textContent = "$"+subtotal+".00";
+        label.textContent = currency === "clp" ? "$" + subtotal + ".00" : "$" + subtotal;
 
         actualizarSubtotal(sub);
         calcularTotal();
@@ -74,20 +86,31 @@ function actualizarEtiqueta2(input, label, sub) {
     subtotal = 0
     moneda = currency === "clp" ? clp : usd
     optionsRam = currency === "clp" ? [ram[1],ram[2],ram[3]] : [ram[4],ram[5],ram[6]];
-    //console.log(moneda);
     if(item == 'ram'){
         if(unitario === 1)
             subtotal = optionsRam[0];
-        else if(unitario <12)
-            subtotal = (optionsRam[0]-optionsRam[1]*(unitario-2))*unitario;
-        else
-            subtotal = optionsRam[2]*unitario;
+        else if(unitario < 12){
+            subtotal = unitario - 2;
+            subtotal = subtotal * optionsRam[1];                
+            subtotal = optionsRam[0] - subtotal;                
+            subtotal = subtotal * unitario;
+            subtotal = subtotal.toFixed(2);                
+        }else{
+            subtotal = optionsRam[2] * unitario;
+            subtotal = subtotal.toFixed(2);
+        }
     } else if(true){
         //Formula para calcular el valor de cada componente del servidor que no sea la ram
-        subtotal = unitario <= base[item] ? 0 : (unitario-base[item])*moneda[item];
+        if(unitario <= base[item]){
+            subtotal = 0;
+        } else{
+            subtotal = unitario - base[item];                
+            subtotal = subtotal * moneda[item];
+            subtotal = subtotal.toFixed(2);
+        }
     }
     //Se actualiza la label con el valor calculado arriba
-    label.textContent = "$"+subtotal+".00";
+    label.textContent = currency === "clp" ? "$"+subtotal+".00" : "$"+subtotal;
 
     actualizarSubtotal(sub);
 }
@@ -98,20 +121,31 @@ function actualizarEtiqueta3(input, label, sub) {
     subtotal = 0
     moneda = currency === "clp" ? clp : usd
     optionsRam = currency === "clp" ? [ram[1],ram[2],ram[3]] : [ram[4],ram[5],ram[6]];
-    //console.log(moneda);
     if(item == 'ram'){
         if(unitario === 1)
             subtotal = optionsRam[0];
-        else if(unitario <12)
-            subtotal = (optionsRam[0]-optionsRam[1]*(unitario-2))*unitario;
-        else
-            subtotal = optionsRam[2]*unitario;
+        else if(unitario < 12){
+            subtotal = unitario - 2;
+            subtotal = subtotal * optionsRam[1];                
+            subtotal = optionsRam[0] - subtotal;                
+            subtotal = subtotal * unitario;
+            subtotal = subtotal.toFixed(2);                
+        }else{
+            subtotal = optionsRam[2] * unitario;
+            subtotal = subtotal.toFixed(2);
+        }
     } else if(true){
         //Formula para calcular el valor de cada componente del servidor que no sea la ram
-        subtotal = unitario <= base[item] ? 0 : (unitario-base[item])*moneda[item];
+        if(unitario <= base[item]){
+            subtotal = 0;
+        } else{
+            subtotal = unitario - base[item];                
+            subtotal = subtotal * moneda[item];
+            subtotal = subtotal.toFixed(2);
+        }
     }
     //Se actualiza la label con el valor calculado arriba
-    label.textContent = "$"+subtotal+".00";
+    label.textContent = currency === "clp" ? "$"+subtotal+".00" : "$"+subtotal;
     for (let i=0; i < sub.length; i++){
         actualizarSubtotal(sub[i]);
     }    
@@ -135,10 +169,8 @@ function calcularTotal(){
     });
     let months = discounts[discount2];
     //total=total*(1-(discount1/100));
-    total=total*(1-(discount2/100));
-
-    total=total.toFixed(6)
-
+    total = total *( 1 - (discount2 / 100));
+    total = total.toFixed(6)
     var valueMonth = total;
 
     valueMonth = parseFloat(valueMonth).toFixed(2);
@@ -323,8 +355,7 @@ function downloadExcel(){
         totaltotal = totaltotal * 12;
     }
     
-    final.push([,"Sub-total Final", "$" + totaltotal, "Por "+ dis2]);    
-    console.log(totaltotal);
+    final.push([,"Sub-total Final", "$" + totaltotal, "Por "+ dis2]);
     let descuento = totaltotal - ((1 - ((Number(aux2))/100)) * totaltotal);
     final.push([, "Descuento", aux2 + "%", "$-" + descuento,"Descuento por " + dis2]);
 
@@ -343,11 +374,11 @@ function actualizarSubtotal(sub){
     let subtotal = 0;
     
     inputs.forEach(function(input) {
-        let content =input.textContent.slice(1,-3);
+        let content = currency === "clp" ? input.textContent.slice(1,-3) : input.textContent.slice(1);
         subtotal += parseFloat(content);
     });
-
-    sub.textContent = 'Subtotal: $' + subtotal + '.00';
+    subtotal = subtotal.toFixed(2);
+    sub.textContent = currency === "clp" ? 'Subtotal: $' + subtotal + '.00' : 'Subtotal: $' + subtotal;
 }
 
 //Pone en order las funciones llamadas al inicio de la página
