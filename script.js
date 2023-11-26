@@ -41,7 +41,7 @@ const discounts = {
 let currency = "clp"
 
 //Función que actualiza los precios en relación al input numerico
-function actualizarEtiqueta(input, label) {
+function actualizarEtiqueta(input, label, sub) {
     return function() {
         item = input.getAttribute('id');
         unitario = Number(input.value);
@@ -60,33 +60,61 @@ function actualizarEtiqueta(input, label) {
             //Formula para calcular el valor de cada componente del servidor que no sea la ram
             subtotal = unitario <= base[item] ? 0 : (unitario-base[item])*moneda[item];
         }
-
         //Se actualiza la label con el valor calculado arriba
         label.textContent = "$"+subtotal+".00";
+
+        actualizarSubtotal(sub);
+        calcularTotal();
     };
 }
 
-function actualizarEtiqueta2(input, label) {
-        item = input.getAttribute('id');
-        unitario = Number(input.value);
-        subtotal = 0
-        moneda = currency === "clp" ? clp : usd
-        optionsRam = currency === "clp" ? [ram[1],ram[2],ram[3]] : [ram[4],ram[5],ram[6]];
-        //console.log(moneda);
-        if(item == 'ram'){
-            if(unitario === 1)
-                subtotal = optionsRam[0];
-            else if(unitario <12)
-                subtotal = (optionsRam[0]-optionsRam[1]*(unitario-2))*unitario;
-            else
-                subtotal = optionsRam[2]*unitario;
-        } else if(true){
-            //Formula para calcular el valor de cada componente del servidor que no sea la ram
-            subtotal = unitario <= base[item] ? 0 : (unitario-base[item])*moneda[item];
-        }
+function actualizarEtiqueta2(input, label, sub) {
+    item = input.getAttribute('id');
+    unitario = Number(input.value);
+    subtotal = 0
+    moneda = currency === "clp" ? clp : usd
+    optionsRam = currency === "clp" ? [ram[1],ram[2],ram[3]] : [ram[4],ram[5],ram[6]];
+    //console.log(moneda);
+    if(item == 'ram'){
+        if(unitario === 1)
+            subtotal = optionsRam[0];
+        else if(unitario <12)
+            subtotal = (optionsRam[0]-optionsRam[1]*(unitario-2))*unitario;
+        else
+            subtotal = optionsRam[2]*unitario;
+    } else if(true){
+        //Formula para calcular el valor de cada componente del servidor que no sea la ram
+        subtotal = unitario <= base[item] ? 0 : (unitario-base[item])*moneda[item];
+    }
+    //Se actualiza la label con el valor calculado arriba
+    label.textContent = "$"+subtotal+".00";
 
-        //Se actualiza la label con el valor calculado arriba
-        label.textContent = "$"+subtotal+".00";
+    actualizarSubtotal(sub);
+}
+
+function actualizarEtiqueta3(input, label, sub) {
+    item = input.getAttribute('id');
+    unitario = Number(input.value);
+    subtotal = 0
+    moneda = currency === "clp" ? clp : usd
+    optionsRam = currency === "clp" ? [ram[1],ram[2],ram[3]] : [ram[4],ram[5],ram[6]];
+    //console.log(moneda);
+    if(item == 'ram'){
+        if(unitario === 1)
+            subtotal = optionsRam[0];
+        else if(unitario <12)
+            subtotal = (optionsRam[0]-optionsRam[1]*(unitario-2))*unitario;
+        else
+            subtotal = optionsRam[2]*unitario;
+    } else if(true){
+        //Formula para calcular el valor de cada componente del servidor que no sea la ram
+        subtotal = unitario <= base[item] ? 0 : (unitario-base[item])*moneda[item];
+    }
+    //Se actualiza la label con el valor calculado arriba
+    label.textContent = "$"+subtotal+".00";
+    for (let i=0; i < sub.length; i++){
+        actualizarSubtotal(sub[i]);
+    }    
 }
 
 //Función que calcula el valor total de todos los subtotales de los componentes
@@ -119,15 +147,16 @@ function calcularTotal(){
     total=parseFloat(total).toFixed(2);
     total="$"+total+". Cada mes se pagaría: $"+valueMonth+". " + /* "Primer Descuento: " + discount1 +"%." +   */"Segundo Descuento: "+discount2+"%.";
     
-    document.getElementById("totalLabel").textContent="Total para "+months+" mes(es): "+total; 
+    document.getElementById("totalLabel").textContent="Total para "+months+" mes(es): "+total;
 }
 
 function changeLabelCurrency(){
     const labels = document.querySelectorAll(".actualizar");
     const inputs = document.querySelectorAll("input");
+    const subs = document.querySelectorAll(".subtotal");
 
     for (i = 0; i < inputs.length; i++){
-        actualizarEtiqueta2(inputs[i], labels[i])
+        actualizarEtiqueta3(inputs[i], labels[i], subs)
     }    
 }
 
@@ -207,7 +236,9 @@ function crearComponente(cerrar = true) {
             <label class="texto">RAM (GB):</label>
             <input type="number" id="ram" min=0 value="1">
             <label class="actualizar" id="ramLabel">$0.00</label>
-        </div>
+        </div>        
+        <label class="subtotal">Subtotal : $0.00</label>
+        
     `;
 
     //agregar botón par borrar componente
@@ -224,9 +255,10 @@ function crearComponente(cerrar = true) {
     // Configurar eventos para las etiquetas independientes de este componente
     const inputs = componente.querySelectorAll("input");
     const labels = componente.querySelectorAll(".actualizar");
-
-    for (let i = 0; i < inputs.length; i++) {
-        inputs[i].addEventListener("input", actualizarEtiqueta(inputs[i], labels[i]));
+    const sub = componente.querySelector(".subtotal");
+    for (let i = 0; i < inputs.length; i++) {        
+        inputs[i].addEventListener("input", actualizarEtiqueta(inputs[i], labels[i], sub));
+        actualizarEtiqueta2(inputs[i], labels[i],sub);
     }
 
     return componente;
@@ -306,6 +338,18 @@ function downloadExcel(){
     XLSX.writeFile(wb, "calculo.xlsx")
 }
 
+function actualizarSubtotal(sub){
+    const inputs = sub.parentNode.querySelectorAll(".actualizar");
+    let subtotal = 0;
+    
+    inputs.forEach(function(input) {
+        let content =input.textContent.slice(1,-3);
+        subtotal += parseFloat(content);
+    });
+
+    sub.textContent = 'Subtotal: $' + subtotal + '.00';
+}
+
 //Pone en order las funciones llamadas al inicio de la página
 function main(){
     // Agregar un componente inicial
@@ -316,6 +360,7 @@ function main(){
         const contenedor = document.getElementById("contenedor");
         const nuevoComponente = crearComponente();
         contenedor.appendChild(nuevoComponente);
+        calcularTotal();
     });
     // Identifica si el usuario es de chile y si es, define la moneda por defecto como clp
     Intl.DateTimeFormat().resolvedOptions().timeZone === "America/Santiago" ? null : setCurrency();
@@ -323,15 +368,19 @@ function main(){
     // Actualizar etiquetas al inicio para los valores bases de cada item
     const inputs2 = document.querySelectorAll("input");
     const labels2 = document.querySelectorAll(".actualizar");
+    const sub = document.querySelector(".subtotal");
     for (let i = 0; i < inputs2.length; i++) {
-        actualizarEtiqueta2(inputs2[i], labels2[i]);
+        actualizarEtiqueta2(inputs2[i], labels2[i],sub);
     }
+
     // Escucha los eventos de cambio de moneda
     document.getElementById("currency").addEventListener("change", changeCurrency);
-    // Escucha los evento de click en el boton de calcular total
+    // Escucha los eventos de click en el boton de calcular total
     document.getElementById("calcularTotal").addEventListener("click",calcularTotal);
-
+    // Escucha los eventos de click en el boton para descargar el excel con los valores de la calculadora
     document.getElementById("excel").addEventListener("click", downloadExcel);
+
+    calcularTotal();
 }
 
 main();
