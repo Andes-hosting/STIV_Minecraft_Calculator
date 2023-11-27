@@ -209,7 +209,8 @@ function crearComponente(cerrar = true) {
     const componente = document.createElement("div");
     componente.className = "tarjeta";
     componente.innerHTML = `
-        <h2>Calculadora</h2>
+        <h2>Servidor Minecraft Java vanilla | 1GB</h2>
+        <hr>
         <div class="etiquetas">
             <label class="textoS">
                 Servidor Minecraft
@@ -359,9 +360,29 @@ function crearComponente(cerrar = true) {
     const inputs = componente.querySelectorAll("input");
     const labels = componente.querySelectorAll(".actualizar");
     const sub = componente.querySelector(".subtotal");
+
+    const h2 = componente.querySelector("h2");
+    const vers = componente.querySelector(".versions");
+    const ramInput = componente.querySelector("#ram");
+
+    vers.addEventListener('change', function(){
+        let selectedOption = this.options[vers.selectedIndex];
+        actualizarH2(selectedOption.text, ramInput.value);
+    });
+
+    ramInput.addEventListener('input', function() {
+        let selectedOption = vers.options[vers.selectedIndex];
+        actualizarH2(selectedOption.text, ramInput.value);
+    });
+
     for (let i = 0; i < inputs.length; i++) {        
         inputs[i].addEventListener("input", actualizarEtiqueta(inputs[i], labels[i], sub));
         actualizarEtiqueta2(inputs[i], labels[i],sub);
+    }
+    
+    // Función para actualizar el texto del elemento <h2>
+    function actualizarH2(version, ram) {
+        h2.textContent = "Servidor Minecraft " + version + " | " + ram + "GB";
     }
 
     return componente;
