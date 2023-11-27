@@ -1,3 +1,6 @@
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
 //Valores de los componentes del servidor en pesos chilenos
 const clp = {
     'almacenamiento': 100,
@@ -73,7 +76,8 @@ function actualizarEtiqueta(input, label, sub) {
         }
         
         //Se actualiza la label con el valor calculado arriba
-        label.textContent = currency === "clp" ? "$" + subtotal + ".00" : "$" + subtotal;
+        console.log(subtotal);
+        label.textContent = "$" + subtotal;
 
         actualizarSubtotal(sub);
         calcularTotal();
@@ -207,7 +211,17 @@ function crearComponente(cerrar = true) {
     componente.innerHTML = `
         <h2>Calculadora</h2>
         <div class="etiquetas">
-            <label class="textoS">Servidor Minecraft :</label>
+            <label class="textoS">
+                Servidor Minecraft
+                <i class="icon-info-sign" 
+                    data-bs-toggle="popover" 
+                    data-bs-content="sfkjahfkahk" 
+                    data-bs-trigger="hover"
+                    data-bs-auto-close="outside"
+                    data-bs-html="true"
+                    data-bs-placement="auto">            
+                </i>
+            </label>
             <select class="versions">
                 <optgroup label="Minecraft Java">
                     <option value="Java-Java Vanilla" selected>Java Vanilla</option>
@@ -245,27 +259,77 @@ function crearComponente(cerrar = true) {
             </select>
         </div>
         <div class="etiquetas">
-            <label class="texto">Almacenamiento (GB) :</label>
+            <label class="texto">
+                Almacenamiento (GB)
+                <i class="icon-info-sign" 
+                    data-bs-toggle="popover" 
+                    data-bs-content="sfkjahfkahk" 
+                    data-bs-trigger="hover"
+                    data-bs-auto-close="outside"
+                    data-bs-html="true"
+                    data-bs-placement="auto">            
+                </i>
+            </label>            
             <input type="number" id="almacenamiento" min=0 value="4">
             <label class="actualizar" id="almacenamientoLabel">$0.00</label>
         </div>
         <div class="etiquetas">
-            <label class="texto">Bases de Datos:</label>
+            <label class="texto">
+                Bases de Datos
+                <i class="icon-info-sign" 
+                    data-bs-toggle="popover" 
+                    data-bs-content="sfkjahfkahk" 
+                    data-bs-trigger="hover"
+                    data-bs-auto-close="outside"
+                    data-bs-html="true"
+                    data-bs-placement="auto">            
+                </i>
+            </label>
             <input type="number" id="bd" min=0 value="0">
             <label class="actualizar" id="bdLabel">$0.00</label>
         </div>
         <div class="etiquetas">
-            <label class="texto">Backup:</label>
+            <label class="texto">
+                Backup
+                <i class="icon-info-sign" 
+                    data-bs-toggle="popover" 
+                    data-bs-content="sfkjahfkahk" 
+                    data-bs-trigger="hover"
+                    data-bs-auto-close="outside"
+                    data-bs-html="true"
+                    data-bs-placement="auto">            
+                </i>
+            </label>
             <input type="number" id="backup" min=0 value="0">
             <label class="actualizar" id="backupLabel">$0.00</label>
         </div>
         <div class="etiquetas">
-            <label class="texto">Puertos:</label>
+            <label class="texto">
+                Puertos
+                <i class="icon-info-sign" 
+                    data-bs-toggle="popover" 
+                    data-bs-content="sfkjahfkahk" 
+                    data-bs-trigger="hover"
+                    data-bs-auto-close="outside"
+                    data-bs-html="true"
+                    data-bs-placement="auto">            
+                </i>
+            </label>
             <input type="number" id="puertos" min=0 value="1">
             <label class="actualizar" id="puertosLabel">$0.00</label>
         </div>
         <div class="etiquetas">
-            <label class="texto">RAM (GB):</label>
+            <label class="texto">
+                RAM (GB)
+                <i class="icon-info-sign" 
+                    data-bs-toggle="popover" 
+                    data-bs-content="pico pal q lee" 
+                    data-bs-trigger="hover"
+                    data-bs-auto-close="outside"
+                    data-bs-html="true"
+                    data-bs-placement="auto">            
+                </i>
+            </label>
             <input type="number" id="ram" min=0 value="1">
             <label class="actualizar" id="ramLabel">$0.00</label>
         </div>        
@@ -284,6 +348,13 @@ function crearComponente(cerrar = true) {
         componente.appendChild(botonCerrar);
     }
 
+    // Agregar el componente al DOM
+    document.body.appendChild(componente);
+
+    //Inicializar los popovers
+    inicializarPopovers();
+    
+
     // Configurar eventos para las etiquetas independientes de este componente
     const inputs = componente.querySelectorAll("input");
     const labels = componente.querySelectorAll(".actualizar");
@@ -294,6 +365,23 @@ function crearComponente(cerrar = true) {
     }
 
     return componente;
+}
+
+// Funcion para inicializar los popovers
+function inicializarPopovers() {
+    // Obtener todos los elementos con la clase icon-info-sign
+    const iconosInfo = document.querySelectorAll('.icon-info-sign');
+
+    // Iterar sobre cada elemento y aplicar la inicialización del popover
+    iconosInfo.forEach((icono) => {
+        new bootstrap.Popover(icono, {
+            trigger: 'hover',
+            autoClose: 'outside',
+            html: true,
+            placement: 'right'
+            // ... otras opciones del popover ...
+        });
+    });
 }
 
 //Borrar componente
@@ -378,7 +466,7 @@ function actualizarSubtotal(sub){
         subtotal += parseFloat(content);
     });
     subtotal = subtotal.toFixed(2);
-    sub.textContent = currency === "clp" ? 'Subtotal: $' + subtotal + '.00' : 'Subtotal: $' + subtotal;
+    sub.textContent = 'Subtotal: $' + subtotal;
 }
 
 //Pone en order las funciones llamadas al inicio de la página
