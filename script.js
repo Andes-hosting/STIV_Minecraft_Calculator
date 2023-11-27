@@ -215,7 +215,7 @@ function crearComponente(cerrar = true) {
                 Servidor Minecraft
                 <i class="icon-info-sign" 
                     data-bs-toggle="popover" 
-                    data-bs-content="sfkjahfkahk" 
+                    data-bs-content="Estas opciones tenemos disponibles para que uses como base de tu nuevo Servidor de Minecraft, si no sabes cuál quieres puedes elegir "Vanilla" y después hablar con nosotros para que te ayudemos en la elección." 
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
@@ -263,7 +263,7 @@ function crearComponente(cerrar = true) {
                 Almacenamiento (GB)
                 <i class="icon-info-sign" 
                     data-bs-toggle="popover" 
-                    data-bs-content="sfkjahfkahk" 
+                    data-bs-content="En general no necesitas más de 4GB a menos que uses muchos mods o tengas muchos jugadores en tu Server, puedes seleccionar 4 y más adelante aumentarlo según tus necesidades." 
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
@@ -278,7 +278,7 @@ function crearComponente(cerrar = true) {
                 Bases de Datos
                 <i class="icon-info-sign" 
                     data-bs-toggle="popover" 
-                    data-bs-content="sfkjahfkahk" 
+                    data-bs-content="Algunos mods pueden necesitar 1 o más bases de datos, si no lo necesitas en lo inmediato lo puedes agregar más adelante." 
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
@@ -293,7 +293,7 @@ function crearComponente(cerrar = true) {
                 Backup
                 <i class="icon-info-sign" 
                     data-bs-toggle="popover" 
-                    data-bs-content="sfkjahfkahk" 
+                    data-bs-content="Si quieres tener forma de hacer un respaldo de tu servidor, puedes agregar 1 o más respaldos (backup) después puedes volver en el tiempo de tu servidor al momento en que hiciste el backup." 
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
@@ -308,7 +308,7 @@ function crearComponente(cerrar = true) {
                 Puertos
                 <i class="icon-info-sign" 
                     data-bs-toggle="popover" 
-                    data-bs-content="sfkjahfkahk" 
+                    data-bs-content="En general un puerto es suficiente a menos que agregues un mod que requiera puertos extras." 
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
@@ -323,7 +323,7 @@ function crearComponente(cerrar = true) {
                 RAM (GB)
                 <i class="icon-info-sign" 
                     data-bs-toggle="popover" 
-                    data-bs-content="pico pal q lee" 
+                    data-bs-content="Dependiendo de la versión de minecraft, mods, plugins y cantidad de usuarios, la cantidad de RAM que necesites puede variar de 1GB en Bedrock Vanilla a 6GB en Java Forge con algunos mods(Puedes contactarnos para saber más)." 
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
