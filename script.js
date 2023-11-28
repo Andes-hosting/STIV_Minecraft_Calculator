@@ -222,7 +222,7 @@ function crearComponente(cerrar = true) {
                 Servidor Minecraft
                 <i class="icon-info-sign" 
                     data-bs-toggle="popover" 
-                    data-bs-content="Estas opciones tenemos disponibles para que uses como base de tu nuevo Servidor de Minecraft, si no sabes cuál quieres puedes elegir "Vanilla" y después hablar con nosotros para que te ayudemos en la elección." 
+                    data-bs-content="Estas opciones tenemos disponibles para que uses como base de tu nuevo Servidor de Minecraft, si no sabes cuál quieres puedes elegir 'Vanilla' y después hablar con nosotros para que te ayudemos en la elección." 
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
@@ -330,7 +330,7 @@ function crearComponente(cerrar = true) {
                 RAM (GB)
                 <i class="icon-info-sign" 
                     data-bs-toggle="popover" 
-                    data-bs-content="Dependiendo de la versión de minecraft, mods, plugins y cantidad de usuarios, la cantidad de RAM que necesites puede variar de 1GB en Bedrock Vanilla a 6GB en Java Forge con algunos mods(Puedes contactarnos para saber más)." 
+                    data-bs-content="Dependiendo de la versión de minecraft, mods, plugins y cantidad de usuarios, la cantidad de RAM que necesites puede variar de 1GB en Bedrock Vanilla a 6GB en Java Forge con algunos mods (puedes contactarnos para saber más)." 
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
@@ -405,7 +405,7 @@ function inicializarPopovers() {
             trigger: 'hover',
             autoClose: 'outside',
             html: true,
-            placement: 'right'
+            placement: 'right',
             // ... otras opciones del popover ...
         });
     });
