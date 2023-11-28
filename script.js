@@ -202,8 +202,7 @@ function calcularTotal(){
 function changeLabelCurrency(){
     const labels = document.querySelectorAll(".actualizar");
     const inputs = document.querySelectorAll("input");
-    const subs = document.querySelectorAll(".subtotal");
-
+    const subs = document.querySelectorAll("[id='subtotal']");
     for (i = 0; i < inputs.length; i++){
         actualizarEtiqueta3(inputs[i], labels[i], subs)
     }    
@@ -222,9 +221,10 @@ function crearComponente(cerrar = true) {
     const componente = document.createElement("div");
     componente.className = "tarjeta";
     componente.innerHTML = `
-        <h2 class="p-3">Servidor Minecraft Java vanilla | 1GB</h2>
-        <hr>
-        <div class="etiquetas">
+        <h2 class="p-3 display-5 display-font-3 fs-1 fw-bold">Servidor Minecraft Java vanilla | 1GB</h2>
+        <hr class="hr-blurry">
+        <div class="d-flex flex-column justify-content-center align-items-center m-2" id="etiquetas">
+            <div class="d-flex flex-row w-auto">
             <label class="textoS">
                 Servidor Minecraft
                 <i class="icon-info-sign" 
@@ -236,43 +236,46 @@ function crearComponente(cerrar = true) {
                     data-bs-placement="auto">            
                 </i>
             </label>
-            <select class="versions">
-                <optgroup label="Minecraft Java">
-                    <option value="Java-Java Vanilla" selected>Java Vanilla</option>
-                    <option value="Java-Bungeecord">Bungeecord</option>
-                    <option value="Java-Cuberite">Cuberite</option>
-                    <option value="Java-CurseForge">CurseForge</option>
-                    <option value="Java-Fabric">Fabric</option>
-                    <option value="Java-Feather">Feather</option>
-                    <option value="Java-Forge">Forge</option>
-                    <option value="Java-Feed The Beast">Feed The Beast</option>
-                    <option value="Java-Glowstone">Glowstone</option>
-                    <option value="Java-Limbo">Limbo</option>
-                    <option value="Java-Krypton">Krypton</option>
-                    <option value="Java-Magma">Magma</option>
-                    <option value="Java-Modrinth">Modrinth</option>
-                    <option value="Java-Mohist">Mohist</option>
-                    <option value="Java-NanoLimbo">NanoLimbo</option>
-                    <option value="Java-Paper">Paper</option>
-                    <option value="Java-Folia">Folia</option>
-                    <option value="Java-Purpur">Purpur</option>
-                    <option value="Java-Quilt">Quilt</option>
-                    <option value="Java-Spigot">Spigot</option>
-                    <option value="Java-SpongeForge" disabled>SpongeForge</option>
-                    <option value="Java-SpongeVanilla">SpongeVanilla</option>
-                    <option value="Java-Technic">Technic</option>
-                    <option value="Java-VanillaCord">VanillaCord</option>
-                </optgroup>
-                <optgroup label="Minecraft Bedrock">
-                    <option value="Bedrock-Bedrock Vanilla">Bedrock Vanilla</option>
-                    <option value="Bedrock-gomint">gomint</option>
-                    <option value="Bedrock-LiteLoaderBDS">LiteLoaderBDS</option>
-                    <option value="Bedrock-Nukkit">Nukkit</option>
-                    <option value="Bedrock-PocketMine">PocketMine MP</option>
-                </optgroup>
-            </select>
+            </div>
+            <div class="d-flex flex-column w-50" id="ante">
+                <select class="text-center" id="versions">
+                    <optgroup label="Minecraft Java">
+                        <option value="Java-Java Vanilla" selected>Java Vanilla</option>
+                        <option value="Java-Bungeecord">Bungeecord</option>
+                        <option value="Java-Cuberite">Cuberite</option>
+                        <option value="Java-CurseForge">CurseForge</option>
+                        <option value="Java-Fabric">Fabric</option>
+                        <option value="Java-Feather">Feather</option>
+                        <option value="Java-Forge">Forge</option>
+                        <option value="Java-Feed The Beast">Feed The Beast</option>
+                        <option value="Java-Glowstone">Glowstone</option>
+                        <option value="Java-Limbo">Limbo</option>
+                        <option value="Java-Krypton">Krypton</option>
+                        <option value="Java-Magma">Magma</option>
+                        <option value="Java-Modrinth">Modrinth</option>
+                        <option value="Java-Mohist">Mohist</option>
+                        <option value="Java-NanoLimbo">NanoLimbo</option>
+                        <option value="Java-Paper">Paper</option>
+                        <option value="Java-Folia">Folia</option>
+                        <option value="Java-Purpur">Purpur</option>
+                        <option value="Java-Quilt">Quilt</option>
+                        <option value="Java-Spigot">Spigot</option>
+                        <option value="Java-SpongeForge" disabled>SpongeForge</option>
+                        <option value="Java-SpongeVanilla">SpongeVanilla</option>
+                        <option value="Java-Technic">Technic</option>
+                        <option value="Java-VanillaCord">VanillaCord</option>
+                    </optgroup>
+                    <optgroup label="Minecraft Bedrock">
+                        <option value="Bedrock-Bedrock Vanilla">Bedrock Vanilla</option>
+                        <option value="Bedrock-gomint">gomint</option>
+                        <option value="Bedrock-LiteLoaderBDS">LiteLoaderBDS</option>
+                        <option value="Bedrock-Nukkit">Nukkit</option>
+                        <option value="Bedrock-PocketMine">PocketMine MP</option>
+                    </optgroup>
+                </select>
+            </div>
         </div>
-        <div class="etiquetas">
+        <div class="d-flex flex-column justify-content-center align-items-center m-2" id="etiquetas">
             <label class="texto">
                 Almacenamiento (GB)
                 <i class="icon-info-sign" 
@@ -284,10 +287,10 @@ function crearComponente(cerrar = true) {
                     data-bs-placement="auto">            
                 </i>
             </label>            
-            <input type="number" id="almacenamiento" min=0 value="4">
+            <input type="number" id="almacenamiento" min=0 value="4" class="text-center w-50">
             <label class="actualizar" id="almacenamientoLabel">$0.00</label>
         </div>
-        <div class="etiquetas">
+        <div class="d-flex flex-column justify-content-center align-items-center m-2" id="etiquetas">
             <label class="texto">
                 Bases de Datos
                 <i class="icon-info-sign" 
@@ -299,10 +302,10 @@ function crearComponente(cerrar = true) {
                     data-bs-placement="auto">            
                 </i>
             </label>
-            <input type="number" id="bd" min=0 value="0">
+            <input type="number" id="bd" min=0 value="0" class="text-center w-50">
             <label class="actualizar" id="bdLabel">$0.00</label>
         </div>
-        <div class="etiquetas">
+        <div class="d-flex flex-column justify-content-center align-items-center m-2" id="etiquetas">
             <label class="texto">
                 Backup
                 <i class="icon-info-sign" 
@@ -314,10 +317,10 @@ function crearComponente(cerrar = true) {
                     data-bs-placement="auto">            
                 </i>
             </label>
-            <input type="number" id="backup" min=0 value="0">
+            <input type="number" id="backup" min=0 value="0" class="text-center w-50">
             <label class="actualizar" id="backupLabel">$0.00</label>
         </div>
-        <div class="etiquetas">
+        <div class="d-flex flex-column justify-content-center align-items-center m-2" id="etiquetas">
             <label class="texto">
                 Puertos
                 <i class="icon-info-sign" 
@@ -329,10 +332,10 @@ function crearComponente(cerrar = true) {
                     data-bs-placement="auto">            
                 </i>
             </label>
-            <input type="number" id="puertos" min=0 value="1">
+            <input type="number" id="puertos" min=0 value="1" class="text-center w-50">
             <label class="actualizar" id="puertosLabel">$0.00</label>
         </div>
-        <div class="etiquetas">
+        <div class="d-flex flex-column justify-content-center align-items-center m-2" id="etiquetas">
             <label class="texto">
                 RAM (GB)
                 <i class="icon-info-sign" 
@@ -344,10 +347,14 @@ function crearComponente(cerrar = true) {
                     data-bs-placement="auto">            
                 </i>
             </label>
-            <input type="number" id="ram" min=0 value="1">
+            <input type="number" id="ram" min=0 value="1" class="text-center w-50">
             <label class="actualizar" id="ramLabel">$0.00</label>
-        </div>        
-        <label class="subtotal">Subtotal : $0.00</label>
+        </div>
+        <div class="d-flex flex-column align-items-center h-auto" id="subtotal">
+            <label class="subtotal" id="subtotal">
+                Subtotal : $0.00
+            </label>
+        </div>
         
     `;
 
@@ -383,10 +390,10 @@ function crearComponente(cerrar = true) {
     // Configurar eventos para las etiquetas independientes de este componente
     const inputs = componente.querySelectorAll("input");
     const labels = componente.querySelectorAll(".actualizar");
-    const sub = componente.querySelector(".subtotal");
+    const sub = componente.querySelector("#subtotal .subtotal");
 
     const h2 = componente.querySelector("h2");
-    const vers = componente.querySelector(".versions");
+    const vers = componente.querySelector("select.text-center");
     const ramInput = componente.querySelector("#ram");
 
     vers.addEventListener('change', function(){
@@ -413,7 +420,7 @@ function crearComponente(cerrar = true) {
 }
 
 function minimizarComponente(componente){
-    let targets = componente.querySelectorAll(".etiquetas");
+    let targets = componente.querySelectorAll(".d-flex flex-column justify-content-center align-items-center");
     let hr = componente.querySelector("hr");
 
     targets.forEach(function(target) {
@@ -462,7 +469,7 @@ function setCurrency(){
 }
 
 function downloadExcel(){  
-    const opt = document.querySelectorAll("select.versions")
+    const opt = document.querySelectorAll("#ante .text-center")
     comps = opt.length;
 
     let final = [];
@@ -470,10 +477,10 @@ function downloadExcel(){
     entradas = document.querySelectorAll("input");
     actualizaciones = document.querySelectorAll(".actualizar");
     etiquetas = document.querySelectorAll(".texto");
-    let totaltotal = 0;    
+    let totaltotal = 0;
 
     for (let index = 0; index < comps; index++) {
-        final.push([opt[index].value, entradas[((5-1)+(index*5))].value + "GB RAM"]);
+        final.push([opt[index].value, entradas[((5 - 1) + (index * 5))].value + "GB RAM"]);
         final.push(["Atributo","Cantidad","Precio"]);
         let subt = 0
         for(let abc  = 0+(5*index); abc < 5+(5*index); abc++){
@@ -481,7 +488,7 @@ function downloadExcel(){
             let b = Number(entradas[abc].value);
             let c = actualizaciones[abc].textContent;
             final.push([a,b,c]);
-            c = c.slice(1, -3);
+            c = c.slice(1);
             subt = subt + Number(c);
         }
         final.push([,"Sub-Total Server", "$"+subt, "Por mes"]);
@@ -520,13 +527,14 @@ function downloadExcel(){
 }
 
 function actualizarSubtotal(sub){
-    const inputs = sub.parentNode.querySelectorAll(".actualizar");
+    const inputs = sub.parentNode.parentNode.querySelectorAll(".actualizar");
     let subtotal = 0;
     inputs.forEach(function(input) {
         let content = currency === "clp" ? input.textContent.slice(1) : input.textContent.slice(1);
         subtotal += parseFloat(content);
     });
     subtotal = subtotal.toFixed(2);
+
     sub.textContent = currency === "clp" ? 'Subtotal: $' + subtotal.slice(0,-3) : 'Subtotal: $' + subtotal;
 }
 
@@ -554,7 +562,7 @@ function main(){
     // Actualizar etiquetas al inicio para los valores bases de cada item
     const inputs2 = document.querySelectorAll("input");
     const labels2 = document.querySelectorAll(".actualizar");
-    const sub = document.querySelector(".subtotal");
+    const sub = document.querySelector("#subtotal .subtotal");
     for (let i = 0; i < inputs2.length; i++) {
         actualizarEtiqueta2(inputs2[i], labels2[i],sub);
     }
