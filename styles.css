@@ -1,27 +1,5 @@
-.componente {
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    justify-items: center;
-    height: auto;
-}
-
-#componenteInicial{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-items: center;
-    height: auto;
-    width: 300px;
-}
-
 #agregarComponente{
     width: 50px;
-}
-
-#contenedor{
-    display: block;
 }
 
 .tarjeta{
@@ -47,10 +25,6 @@ input{
     margin-right: 5px;
 }
 
-/* .actualizar{
-    background-color: aqua;
-} */
-
 .texto {
     text-align: left;
     display: block;
@@ -59,12 +33,6 @@ input{
 button{
     margin: 20px;
 }
-
-/* #totalLabel{
-    padding: 5px,10px;
-    font-size: 50px;
-    background-color: aquamarine;
-} */
 
 .close{
     background-color: #e74c3c;
@@ -75,40 +43,25 @@ button{
     position: absolute;
     top: 5px;
     right: 5px;
+    margin: 0;
 }
 
 .close:hover{
     background-color: #c0392b;
 }
 
-/*
-#nuevasCotizaciones{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
+.minimizar{
+    background-color: blue;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 35px;
+    margin: 0;
 }
 
-input, .subtotal{
-    
-    align-items: end;
-}
-
-.texto {
-    text-align: left;
-    display: block;
-}
-
-#ramLabel,#puertosLabel,#backupLabel,#bdLabel,#almacenamientoLabel {
+.minimizar:hover{
     background-color: aqua;
-    display: inline-block;
 }
-
-.componente2{
-    height: 50px;
-}
-
-
-.boton{
-    float: right;
-} 
