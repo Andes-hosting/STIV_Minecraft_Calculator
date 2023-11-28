@@ -52,8 +52,10 @@ function actualizarEtiqueta(input, label, sub) {
         moneda = currency === "clp" ? clp : usd
         optionsRam = currency === "clp" ? [ram[1], ram[2], ram[3]] : [ram[4], ram[5], ram[6]];
         if(item == 'ram'){
-            if(unitario === 1)
+            if(unitario === 1){
                 subtotal = optionsRam[0];
+                subtotal = subtotal.toFixed(2);
+            }
             else if(unitario < 12){
                 subtotal = unitario - 2;
                 subtotal = subtotal * optionsRam[1];                
@@ -76,7 +78,7 @@ function actualizarEtiqueta(input, label, sub) {
         }
         
         //Se actualiza la label con el valor calculado arriba
-        console.log(subtotal);
+        subtotal = currency === "clp" ? subtotal.slice(0,-3) : subtotal;
         label.textContent = "$" + subtotal;
 
         actualizarSubtotal(sub);
@@ -91,8 +93,9 @@ function actualizarEtiqueta2(input, label, sub) {
     moneda = currency === "clp" ? clp : usd
     optionsRam = currency === "clp" ? [ram[1],ram[2],ram[3]] : [ram[4],ram[5],ram[6]];
     if(item == 'ram'){
-        if(unitario === 1)
+        if(unitario === 1){
             subtotal = optionsRam[0];
+        }
         else if(unitario < 12){
             subtotal = unitario - 2;
             subtotal = subtotal * optionsRam[1];                
@@ -114,7 +117,7 @@ function actualizarEtiqueta2(input, label, sub) {
         }
     }
     //Se actualiza la label con el valor calculado arriba
-    label.textContent = currency === "clp" ? "$"+subtotal+".00" : "$"+subtotal;
+    label.textContent = currency === "clp" ? "$" + subtotal : "$" + subtotal;
 
     actualizarSubtotal(sub);
 }
@@ -126,8 +129,10 @@ function actualizarEtiqueta3(input, label, sub) {
     moneda = currency === "clp" ? clp : usd
     optionsRam = currency === "clp" ? [ram[1],ram[2],ram[3]] : [ram[4],ram[5],ram[6]];
     if(item == 'ram'){
-        if(unitario === 1)
+        if(unitario === 1){
             subtotal = optionsRam[0];
+            subtotal = subtotal.toFixed(2);
+        }
         else if(unitario < 12){
             subtotal = unitario - 2;
             subtotal = subtotal * optionsRam[1];                
@@ -149,7 +154,7 @@ function actualizarEtiqueta3(input, label, sub) {
         }
     }
     //Se actualiza la label con el valor calculado arriba
-    label.textContent = currency === "clp" ? "$"+subtotal+".00" : "$"+subtotal;
+    label.textContent = currency === "clp" ? "$"+subtotal.slice(0,-3) : "$"+subtotal;
     for (let i=0; i < sub.length; i++){
         actualizarSubtotal(sub[i]);
     }    
@@ -172,7 +177,6 @@ function calcularTotal(){
         total += parseFloat(aux);
     });
     let months = discounts[discount2];
-    //total=total*(1-(discount1/100));
 
     let descuentoTotal = total*(discount2/100)*months;
     descuentoTotal = descuentoTotal.toFixed(2);
@@ -185,8 +189,11 @@ function calcularTotal(){
 
     total = total * months;
     total = parseFloat(total).toFixed(2);
-   
-    
+
+    descuentoTotal = currency === "clp" ? descuentoTotal.slice(0,-3) : descuentoTotal;
+    valueMonth = currency === "clp" ? valueMonth.slice(0,-3) : valueMonth;
+    total = currency === "clp" ? total.slice(0,-3) : total;
+
     document.getElementById("descuntoTotal").textContent = "Descuento: -$" + descuentoTotal;
     document.getElementById("totalMes").textContent = "Precio por mes: $" + valueMonth;
     document.getElementById("totalLabel").textContent = "Precio Final: $" + total;
@@ -487,20 +494,18 @@ function downloadExcel(){
 function actualizarSubtotal(sub){
     const inputs = sub.parentNode.querySelectorAll(".actualizar");
     let subtotal = 0;
-    
     inputs.forEach(function(input) {
-        let content = currency === "clp" ? input.textContent.slice(1,-3) : input.textContent.slice(1);
+        let content = currency === "clp" ? input.textContent.slice(1) : input.textContent.slice(1);
         subtotal += parseFloat(content);
     });
     subtotal = subtotal.toFixed(2);
-    sub.textContent = 'Subtotal: $' + subtotal;
+    sub.textContent = currency === "clp" ? 'Subtotal: $' + subtotal.slice(0,-3) : 'Subtotal: $' + subtotal;
 }
 
 function changeDiscount(){
     const discount = document.getElementById("segundodescuento").value;
     const labelChange = document.getElementById("changeDiscount");
     labelChange.textContent = "Dscto " + discount + "%";
-    console.log(discount);
 }
 
 //Pone en order las funciones llamadas al inicio de la página
