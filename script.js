@@ -222,7 +222,7 @@ function crearComponente(cerrar = true) {
     const componente = document.createElement("div");
     componente.className = "tarjeta";
     componente.innerHTML = `
-        <h2>Servidor Minecraft Java vanilla | 1GB</h2>
+        <h2 class="p-3">Servidor Minecraft Java vanilla | 1GB</h2>
         <hr>
         <div class="etiquetas">
             <label class="textoS">
@@ -360,10 +360,21 @@ function crearComponente(cerrar = true) {
             borrarComponente(componente);
         });
         componente.appendChild(botonCerrar);
+
+        const botonMinimizar = document.createElement("button");
+        botonMinimizar.className = "minimizar";
+        botonMinimizar.textContent = "-";
+        botonMinimizar.addEventListener("click", function(){
+            minimizarComponente(componente);
+        });
+        componente.appendChild(botonMinimizar);
     }
+    
 
     // Agregar el componente al DOM
     document.body.appendChild(componente);
+
+    
 
     //Inicializar los popovers
     inicializarPopovers();
@@ -399,6 +410,23 @@ function crearComponente(cerrar = true) {
     }
 
     return componente;
+}
+
+function minimizarComponente(componente){
+    let targets = componente.querySelectorAll(".etiquetas");
+    let hr = componente.querySelector("hr");
+
+    targets.forEach(function(target) {
+        if(target.style.display === "none"){
+            target.style.display = "block";
+            hr.style.display = "block";
+        } else {
+            target.style.display = "none";
+            hr.style.display = "none";
+        }
+    });
+
+    
 }
 
 // Funcion para inicializar los popovers
