@@ -173,17 +173,23 @@ function calcularTotal(){
     });
     let months = discounts[discount2];
     //total=total*(1-(discount1/100));
+
+    let descuentoTotal = total*(discount2/100)*months;
+    descuentoTotal = descuentoTotal.toFixed(2);
+
     total = total *( 1 - (discount2 / 100));
     total = total.toFixed(6)
     var valueMonth = total;
 
     valueMonth = parseFloat(valueMonth).toFixed(2);
 
-    total=total*months;
-    total=parseFloat(total).toFixed(2);
-    total="$"+total+". Cada mes se pagaría: $"+valueMonth+". " + /* "Primer Descuento: " + discount1 +"%." +   */"Segundo Descuento: "+discount2+"%.";
+    total = total * months;
+    total = parseFloat(total).toFixed(2);
+   
     
-    document.getElementById("totalLabel").textContent="Total para "+months+" mes(es): "+total;
+    document.getElementById("descuntoTotal").textContent = "Descuento: -$" + descuentoTotal;
+    document.getElementById("totalMes").textContent = "Precio por mes: $" + valueMonth;
+    document.getElementById("totalLabel").textContent = "Precio Final: $" + total;
 }
 
 function changeLabelCurrency(){
@@ -490,13 +496,20 @@ function actualizarSubtotal(sub){
     sub.textContent = 'Subtotal: $' + subtotal;
 }
 
+function changeDiscount(){
+    const discount = document.getElementById("segundodescuento").value;
+    const labelChange = document.getElementById("changeDiscount");
+    labelChange.textContent = "Dscto " + discount + "%";
+    console.log(discount);
+}
+
 //Pone en order las funciones llamadas al inicio de la página
 function main(){
     // Agregar un componente inicial
     const componenteInicial = crearComponente(false);
     document.getElementById("componenteInicial").appendChild(componenteInicial);
     // Escucha los evento de click en el boton + para agregar otro componente
-    document.getElementById("agregarComponente").addEventListener("click", function() {
+    document.querySelector(".agregarComponente").addEventListener("click", function() {
         const contenedor = document.getElementById("contenedor");
         const nuevoComponente = crearComponente();
         contenedor.appendChild(nuevoComponente);
@@ -519,6 +532,8 @@ function main(){
     document.getElementById("calcularTotal").addEventListener("click",calcularTotal);
     // Escucha los eventos de click en el boton para descargar el excel con los valores de la calculadora
     document.getElementById("excel").addEventListener("click", downloadExcel);
+    // Escucha los eventos de cambio del descuento por meses y llama al funcion changeDiscount
+    document.getElementById("segundodescuento").addEventListener("change", changeDiscount);
 
     calcularTotal();
 }

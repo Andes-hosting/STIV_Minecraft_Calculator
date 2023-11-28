@@ -47,9 +47,9 @@ input{
     margin-right: 5px;
 }
 
-.actualizar{
+/* .actualizar{
     background-color: aqua;
-}
+} */
 
 .texto {
     text-align: left;
@@ -60,11 +60,11 @@ button{
     margin: 20px;
 }
 
-#totalLabel{
+/* #totalLabel{
     padding: 5px,10px;
     font-size: 50px;
     background-color: aquamarine;
-}
+} */
 
 .close{
     background-color: #e74c3c;

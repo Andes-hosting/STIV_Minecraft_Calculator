@@ -21,7 +21,7 @@
         <div id="componenteInicial"></div>
         
         <div id="contenedor"></div>
-        <button id="agregarComponente">+</button>
+        <button id="agregarComponente b1" class="agregarComponente m-1">+ Otro servidor</button>
 
         <!-- Primer descuento(personalizado) -->
         <!-- <div class="descuentoPersonalizado">            
@@ -42,21 +42,27 @@
         </div> -->
 
         <!-- Segundo descuento(1mes,3meses,1año) -->
-        <div class="descuentoTiempo">            
-            <label for="SegundoDescuento">Segundo Descuento</label>
-
-                <select id="segundodescuento">
-                    <option value="0" selected="selected">1 mes</option>
-                    <option value="4.5">3 meses</option>
-                    <option value="10">1 año</option>
-                </select>
+        <div class="descuentoSegundo" class="d-block">            
+            <label for="SegundoDescuento" class="d-block m-1">Plan de Suscripción</label>
+            <select id="segundodescuento" class="text-center m-1">
+                <option value="0" selected="selected">1 mes</option>
+                <option value="4.5">Trimestral (3 meses)</option>
+                <option value="10">Anual (1 año)</option>
+            </select>
+            <label id="changeDiscount">Dscto 0%</label>            
         </div>
-      
-        <button id="calcularTotal">Calcular Total</button>
-        <div id="totalLabel">Total: $0.00</div>
+    </div>
 
-        <button id="excel">Descargar calculo en excel</button>
-        
+    <button id="calcularTotal" class="d-block mx-auto m-2">Calcular Total</button>
+    <div class="d-flex justify-content-center">
+        <div class="border border-2 m-2">
+            <label id="descuntoTotal" class="d-block"></label>
+            <label id="totalMes" class="d-block"></label>
+            <div id="totalLabel" class="d-block"></div>
+        </div>
+        <div class="d-flex align-items-center m-2">
+            <button id="excel">Descargar calculo en excel</button>
+        </div>            
     </div>
 
     <!-- <footer>
