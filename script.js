@@ -86,42 +86,6 @@ function actualizarEtiqueta(input, label, sub) {
     };
 }
 
-function actualizarEtiqueta2(input, label, sub) {
-    item = input.getAttribute('id');
-    unitario = Number(input.value);
-    subtotal = 0
-    moneda = currency === "clp" ? clp : usd
-    optionsRam = currency === "clp" ? [ram[1],ram[2],ram[3]] : [ram[4],ram[5],ram[6]];
-    if(item == 'ram'){
-        if(unitario === 1){
-            subtotal = optionsRam[0];
-        }
-        else if(unitario < 12){
-            subtotal = unitario - 2;
-            subtotal = subtotal * optionsRam[1];                
-            subtotal = optionsRam[0] - subtotal;                
-            subtotal = subtotal * unitario;
-            subtotal = subtotal.toFixed(2);                
-        }else{
-            subtotal = optionsRam[2] * unitario;
-            subtotal = subtotal.toFixed(2);
-        }
-    } else if(true){
-        //Formula para calcular el valor de cada componente del servidor que no sea la ram
-        if(unitario <= base[item]){
-            subtotal = 0;
-        } else{
-            subtotal = unitario - base[item];                
-            subtotal = subtotal * moneda[item];
-            subtotal = subtotal.toFixed(2);
-        }
-    }
-    //Se actualiza la label con el valor calculado arriba
-    label.textContent = currency === "clp" ? "$" + subtotal : "$" + subtotal;
-
-    actualizarSubtotal(sub);
-}
-
 function actualizarEtiqueta3(input, label, sub) {
     item = input.getAttribute('id');
     unitario = Number(input.value);
@@ -147,6 +111,7 @@ function actualizarEtiqueta3(input, label, sub) {
         //Formula para calcular el valor de cada componente del servidor que no sea la ram
         if(unitario <= base[item]){
             subtotal = 0;
+            subtotal = subtotal.toFixed(2);
         } else{
             subtotal = unitario - base[item];                
             subtotal = subtotal * moneda[item];
@@ -202,7 +167,8 @@ function calcularTotal(){
 function changeLabelCurrency(){
     const labels = document.querySelectorAll(".actualizar");
     const inputs = document.querySelectorAll("input");
-    const subs = document.querySelectorAll("[id='subtotal']");
+    const subs = document.querySelectorAll("#subtotal .subtotal");
+    console.log(subs);
     for (i = 0; i < inputs.length; i++){
         actualizarEtiqueta3(inputs[i], labels[i], subs)
     }    
@@ -408,7 +374,7 @@ function crearComponente(cerrar = true) {
 
     for (let i = 0; i < inputs.length; i++) {        
         inputs[i].addEventListener("input", actualizarEtiqueta(inputs[i], labels[i], sub));
-        actualizarEtiqueta2(inputs[i], labels[i],sub);
+        actualizarEtiqueta3(inputs[i], labels[i],sub);
     }
     
     // Función para actualizar el texto del elemento <h2>
@@ -549,12 +515,17 @@ function main(){
     // Agregar un componente inicial
     const componenteInicial = crearComponente(false);
     document.getElementById("componenteInicial").appendChild(componenteInicial);
+    const subini = componenteInicial.querySelector("#subtotal .subtotal");
+    actualizarSubtotal(subini);
     // Escucha los evento de click en el boton + para agregar otro componente
     document.querySelector(".agregarComponente").addEventListener("click", function() {
         const contenedor = document.getElementById("contenedor");
         const nuevoComponente = crearComponente();
         contenedor.appendChild(nuevoComponente);
         calcularTotal();
+        const sub = nuevoComponente.querySelector("#subtotal .subtotal");
+        console.log(sub);
+        actualizarSubtotal(sub);
     });
     // Identifica si el usuario es de chile y si es, define la moneda por defecto como clp
     Intl.DateTimeFormat().resolvedOptions().timeZone === "America/Santiago" ? null : setCurrency();
@@ -564,7 +535,7 @@ function main(){
     const labels2 = document.querySelectorAll(".actualizar");
     const sub = document.querySelector("#subtotal .subtotal");
     for (let i = 0; i < inputs2.length; i++) {
-        actualizarEtiqueta2(inputs2[i], labels2[i],sub);
+        actualizarEtiqueta3(inputs2[i], labels2[i],sub);
     }
 
     // Escucha los eventos de cambio de moneda
