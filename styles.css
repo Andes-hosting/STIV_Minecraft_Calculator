@@ -17,8 +17,9 @@ h2{
     font-size: auto;
 }
 
-.etiquetas {
-    margin: 10px 0;
+#etiquetas {
+    /* margin: 10px 0; */
+    display: block;
 }
 
 input{

@@ -223,7 +223,7 @@ function crearComponente(cerrar = true) {
     componente.innerHTML = `
         <h2 class="p-3 display-5 display-font-3 fs-1 fw-bold">Servidor Minecraft Java vanilla | 1GB</h2>
         <hr class="hr-blurry">
-        <div class="d-flex flex-column justify-content-center align-items-center m-2" id="etiquetas">
+        <div class="etiquetas" id="etiquetas">
             <div class="d-flex flex-row w-auto">
             <label class="textoS">
                 Servidor Minecraft
@@ -275,7 +275,7 @@ function crearComponente(cerrar = true) {
                 </select>
             </div>
         </div>
-        <div class="d-flex flex-column justify-content-center align-items-center m-2" id="etiquetas">
+        <div class="etiquetas" id="etiquetas">
             <label class="texto">
                 Almacenamiento (GB)
                 <i class="icon-info-sign" 
@@ -290,7 +290,7 @@ function crearComponente(cerrar = true) {
             <input type="number" id="almacenamiento" min=0 value="4" class="text-center w-50">
             <label class="actualizar" id="almacenamientoLabel">$0.00</label>
         </div>
-        <div class="d-flex flex-column justify-content-center align-items-center m-2" id="etiquetas">
+        <div class="etiquetas" id="etiquetas">
             <label class="texto">
                 Bases de Datos
                 <i class="icon-info-sign" 
@@ -305,7 +305,7 @@ function crearComponente(cerrar = true) {
             <input type="number" id="bd" min=0 value="0" class="text-center w-50">
             <label class="actualizar" id="bdLabel">$0.00</label>
         </div>
-        <div class="d-flex flex-column justify-content-center align-items-center m-2" id="etiquetas">
+        <div class="etiquetas" id="etiquetas">
             <label class="texto">
                 Backup
                 <i class="icon-info-sign" 
@@ -320,7 +320,7 @@ function crearComponente(cerrar = true) {
             <input type="number" id="backup" min=0 value="0" class="text-center w-50">
             <label class="actualizar" id="backupLabel">$0.00</label>
         </div>
-        <div class="d-flex flex-column justify-content-center align-items-center m-2" id="etiquetas">
+        <div class="etiquetas" id="etiquetas">
             <label class="texto">
                 Puertos
                 <i class="icon-info-sign" 
@@ -335,7 +335,7 @@ function crearComponente(cerrar = true) {
             <input type="number" id="puertos" min=0 value="1" class="text-center w-50">
             <label class="actualizar" id="puertosLabel">$0.00</label>
         </div>
-        <div class="d-flex flex-column justify-content-center align-items-center m-2" id="etiquetas">
+        <div class="etiquetas" id="etiquetas">
             <label class="texto">
                 RAM (GB)
                 <i class="icon-info-sign" 
@@ -420,7 +420,7 @@ function crearComponente(cerrar = true) {
 }
 
 function minimizarComponente(componente){
-    let targets = componente.querySelectorAll(".d-flex flex-column justify-content-center align-items-center");
+    let targets = componente.querySelectorAll(".etiquetas");
     let hr = componente.querySelector("hr");
 
     targets.forEach(function(target) {
