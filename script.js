@@ -341,7 +341,7 @@ function crearComponente(cerrar = true) {
             <label class="subtotal" id="subtotal">
                 Subtotal : $0.00
             </label>
-        </div>        
+        </div>
     `;
 
     //agregar botón par borrar componente
