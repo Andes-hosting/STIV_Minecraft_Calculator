@@ -348,21 +348,58 @@ function crearComponente(cerrar = true) {
     if(cerrar){
         const botonCerrar = document.createElement("button");
         botonCerrar.className = "close";
-        botonCerrar.textContent = "X";
+        botonCerrar.textContent = "";
         botonCerrar.addEventListener("click", function(){
             borrarComponente(componente);
         });
         componente.appendChild(botonCerrar);
 
-        
+        const iconSvgClose = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const iconPathClose = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'path'
+        );
+        iconSvgClose.setAttribute('height', '16');
+        iconSvgClose.setAttribute('width', '16');
+        iconSvgClose.setAttribute('viewBox', '0 0 384 512');
+
+        iconPathClose.setAttribute(
+            'd',
+            'M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z'
+        );
+
+        iconSvgClose.appendChild(iconPathClose);
+        botonCerrar.appendChild(iconSvgClose);
     }
+
     const botonMinimizar = document.createElement("button");
-        botonMinimizar.className = "minimizar";
-        botonMinimizar.textContent = "-";
-        botonMinimizar.addEventListener("click", function(){
-            minimizarComponente(componente);
-        });
-        componente.appendChild(botonMinimizar);
+    botonMinimizar.className = "minimizar";
+    botonMinimizar.textContent = "";
+    botonMinimizar.id = "minimizar";
+    botonMinimizar.addEventListener("click", function(){
+        minimizarComponente(componente);
+    });
+
+    const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    const iconPath = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'path'
+    );
+    iconSvg.setAttribute('height', '16');
+    iconSvg.setAttribute('width', '16');
+    iconSvg.setAttribute('viewBox', '0 0 512 512');
+    //iconSvg.classList.add('post-icon');
+
+    iconPath.setAttribute(
+        'd',
+        'M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z'
+    );
+
+    iconSvg.appendChild(iconPath);
+
+    botonMinimizar.appendChild(iconSvg);
+
+    componente.appendChild(botonMinimizar);
 
     // Agregar el componente al DOM
     document.body.appendChild(componente);
@@ -408,15 +445,23 @@ function crearComponente(cerrar = true) {
 function minimizarComponente(componente){
     let targets = componente.querySelectorAll("#etiquetas");
     let hr = componente.querySelector("hr");
-    console.log(targets);
+    let icon = componente.querySelector("#minimizar svg path");
 
     targets.forEach(function(target) {
         if(target.style.display === "none"){
             target.style.display = "block";
             hr.style.display = "block";
+            icon.setAttribute(
+                'd',
+                'M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z'
+            );
         } else {
             target.style.display = "none";
             hr.style.display = "none";
+            icon.setAttribute(
+                'd',
+                'M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'
+            );
         }
     });
 
