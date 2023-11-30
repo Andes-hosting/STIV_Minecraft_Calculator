@@ -10,7 +10,7 @@ main {
 }
 /* #contenedor, #componenteInicial */
 .tarjeta {
-    border: 1px solid #ccc;
+    border: 3px solid #ccc;
     padding: 20px;
     width: auto;
     text-align: center;
@@ -22,6 +22,7 @@ main {
 }
 
 #results {
+    border: 3px solid #ccc;
     font-size: 30px;
     background-color: #46434345;
     padding: 10px;
