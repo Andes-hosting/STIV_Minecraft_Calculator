@@ -239,7 +239,7 @@ function crearComponente(cerrar = true) {
                         <option value="Bedrock-PocketMine">PocketMine MP</option>
                     </optgroup>
                 </select>
-                <div class="w-25"></div
+                <div class="w-25"></div>
             </div>
         </div>
         <div class="fs-4" id="etiquetas">
@@ -342,7 +342,6 @@ function crearComponente(cerrar = true) {
                 Subtotal : $0.00
             </label>
         </div>
-        
     `;
 
     //agregar botón par borrar componente
@@ -409,6 +408,7 @@ function crearComponente(cerrar = true) {
 function minimizarComponente(componente){
     let targets = componente.querySelectorAll("#etiquetas");
     let hr = componente.querySelector("hr");
+    console.log(targets);
 
     targets.forEach(function(target) {
         if(target.style.display === "none"){
