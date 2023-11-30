@@ -66,10 +66,11 @@ button {
 }
 
 .close {
-    background-color: #e74c3c;
+    background-color: #46434345;
     color: #fff;
     padding: 5px 10px;
     border: none;
+    border-radius: 25%;
     cursor: pointer;
     position: absolute;
     top: 5px;
@@ -77,25 +78,26 @@ button {
     margin: 0;
 }
 
-.close:hover {
+/* .close:hover {
     background-color: #c0392b;
-}
+} */
 
-.minimizar {
-    background-color: blue;
+#minimizar {
+    background-color: #46434345;
     color: #fff;
     padding: 5px 10px;
     border: none;
+    border-radius: 25%;
     cursor: pointer;
     position: absolute;
     top: 5px;
-    right: 35px;
+    right: 42px;
     margin: 0;
 }
 
-.minimizar:hover {
-    background-color: aqua;
-}
+/* #minimizar:hover {
+    background-color: 4643438a;
+} */
 
 
 footer {
