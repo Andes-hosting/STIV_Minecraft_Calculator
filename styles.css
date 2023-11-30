@@ -1,41 +1,71 @@
-#agregarComponente{
-    width: 50px;
+main {
+    min-height: 100vh;
+    background: url(backg.png);
+    background-size: cover;
+    background-position: center;
 }
 
-.tarjeta{
+#agregarComponente {
+    width: 50px;
+}
+/* #contenedor, #componenteInicial */
+.tarjeta {
     border: 1px solid #ccc;
     padding: 20px;
     width: auto;
-    text-align: left;
-    background-color: #4643433b;
+    text-align: center;
+    background-color: #46434345;
     margin-bottom: 20px;
     position: relative;
+    justify-content: center;
+    height: auto;
 }
 
-h2{
+h2 {
     text-align: center;
     font-size: auto;
 }
 
-.etiquetas {
-    /* margin: 10px 0; */
-    display: block;
+/* .etiquetas {
+    margin: 10px 0;
+    flex-direction: row;
+} */
+
+.actualizar {
+    width: auto;
+    font-size: 30px;
 }
 
-input{
+input {
     margin-right: 5px;
 }
 
 .texto {
-    text-align: left;
-    display: block;
+    text-align: center;
+    display: flex;
+    margin-left: 10%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-button{
+.textos {
+    text-align: center;
+    display: flex;
+    margin-left: 10%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#subtotal {
+    font-size: 50px;
+    margin-top: 10px;
+}
+
+button {
     margin: 20px;
 }
 
-.close{
+.close {
     background-color: #e74c3c;
     color: #fff;
     padding: 5px 10px;
@@ -47,11 +77,11 @@ button{
     margin: 0;
 }
 
-.close:hover{
+.close:hover {
     background-color: #c0392b;
 }
 
-.minimizar{
+.minimizar {
     background-color: blue;
     color: #fff;
     padding: 5px 10px;
@@ -63,11 +93,14 @@ button{
     margin: 0;
 }
 
-.minimizar:hover{
+.minimizar:hover {
     background-color: aqua;
 }
 
-footer{
+
+footer {
     align-items: center;
     text-align: center;
+    padding-bottom: 10px;
+    margin-top: 
 }
