@@ -444,7 +444,7 @@ function crearComponente(cerrar = true) {
 
 function minimizarComponente(componente){
     let targets = componente.querySelectorAll("#etiquetas");
-
+    let hr = componente.querySelector("hr");
     let icon = componente.querySelector("#minimizar svg path");
 
     targets.forEach(function(target) {
