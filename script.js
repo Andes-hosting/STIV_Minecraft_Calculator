@@ -168,7 +168,6 @@ function changeLabelCurrency(){
     const labels = document.querySelectorAll(".actualizar");
     const inputs = document.querySelectorAll("input");
     const subs = document.querySelectorAll("#subtotal .subtotal");
-    console.log(subs);
     for (i = 0; i < inputs.length; i++){
         actualizarEtiqueta3(inputs[i], labels[i], subs)
     }    
@@ -590,7 +589,6 @@ function main(){
         contenedor.appendChild(nuevoComponente);
         calcularTotal();
         const sub = nuevoComponente.querySelector("#subtotal .subtotal");
-        console.log(sub);
         actualizarSubtotal(sub);
     });
     // Identifica si el usuario es de chile y si es, define la moneda por defecto como clp
