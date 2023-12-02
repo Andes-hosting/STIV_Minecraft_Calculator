@@ -12,21 +12,22 @@
 </head>
 <body>
     <main>
-    <nav class="navbar bg-primary bg-opacity-75 p-1">
+    <nav class="navbar bg-opacity-75 p-1">
         <div class="container m-1 p-0 px-4">
           <a class="navbar-brand" href="#">
             <img src="STIV4RRSS.png" alt="Bootstrap" width="72" height="72">
           </a>
         </div>
-    </nav>
-    <div class="w-75">
-        <div class="d-flex flex-row-reverse p-2 fs-5 align-items-center">
-            <select class="form-select fs-5 text-center" name="currency" id="currency">
-                <option class="text-start" value="clp" id="clp" selected>CLP</option>
-                <option class="text-start" value="usd" id="usd">USD</option>                
-            </select>
+        <div class="">
+            <div class="d-flex flex-column p-2 fs-5 align-items-center">
+                <select class="form-select fs-5 text-center" name="currency" id="currency">
+                    <option class="text-start" value="clp" id="clp" selected>CLP</option>
+                    <option class="text-start" value="usd" id="usd">USD</option>                
+                </select>
+            </div>
         </div>
-    </div>
+    </nav>
+    
 
     <div class="d-flex flex-column justify-content-center align-items-center h-auto">
         
@@ -35,8 +36,9 @@
         <div id="contenedor" class="w-50"></div>
 
         <div id="containerAddComponent">
-            <button id="agregarComponente b1" class="agregarComponente m-1 btn btn-primary b1">+ Otro servidor</button>
+            <button id="agregarComponente" class="btn btn-primary" type="button">+ Otro servidor</button>
         </div>  
+        
 
         <!-- Primer descuento(personalizado) -->
         <!-- <div class="descuentoPersonalizado">            
@@ -75,7 +77,7 @@
     <button id="calcularTotal" class="d-block mx-auto m-2 btn btn-primary">Calcular Total</button>
 
     <div class="d-flex justify-content-center" id="secondSection">
-        <div class="border border-white border-2 rounded m-2" id="results">
+        <div class="rounded m-2" id="results">
             <label id="descuntoTotal" class="d-block"></label>
             <label id="totalMes" class="d-block"></label>
             <div id="totalLabel" class="d-block"></div>
@@ -85,11 +87,11 @@
         </div>            
     </div>
     </main>
-
-    <footer class="bg-primary fs-4">
+    
+    <footer class="fs-4">
         <h3 class="fs-2">Contáctanos</h3>
         <p>Y comienza con 3 dias gratis de prueba</p>
-        <a href="https://link.stiv.tech" class="button" id="linkContact">Contacta STIV</a>
+        <p>Contacta <a href="https://link.stiv.tech" class="button" id="linkContact"><img src="STIVSoloLetras.png" width="30" height="20"></a>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

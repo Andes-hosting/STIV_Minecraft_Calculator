@@ -198,7 +198,7 @@ function crearComponente(cerrar = true) {
     componente.className = "tarjeta";
     componente.id = "tarjeta"
     componente.innerHTML = `
-        <h2 class="p-3 display-5 display-font-3 fs-1 fw-bold">Servidor Minecraft Java vanilla | 1GB</h2>
+        <h2 class="p-3 display-5 display-font-3 fs-1 fw-bold">Servidor Minecraft Java Vanilla | 1GB</h2>
         <hr class="hr-blurry">
         <div class="fs-4" id="etiquetas">
             <div class="">
