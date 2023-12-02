@@ -204,7 +204,7 @@ function crearComponente(cerrar = true) {
             </label>
             </div>
             <div class="d-flex flex-row align-items-center justify-content-center" id="ante">
-                <select class="text-center w-50 fs-4" id="versions">
+                <select class="form-select text-center w-50 fs-4" id="versions">
                     <optgroup label="Minecraft Java">
                         <option value="Java-Java Vanilla" selected>Java Vanilla</option>
                         <option value="Java-Bungeecord">Bungeecord</option>
@@ -256,7 +256,7 @@ function crearComponente(cerrar = true) {
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="almacenamiento" min=0 value="4" class="text-center w-50 fs-4">
+                <input type="number" id="almacenamiento" min=0 value="4" class="form-control text-center w-50 fs-4">
                 <div class="w-25">
                     <label class="actualizar" id="actualizar">$0.00</label>
                 </div>
@@ -276,7 +276,7 @@ function crearComponente(cerrar = true) {
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="bd" min=0 value="0" class="text-center w-50 fs-4">
+                <input type="number" id="bd" min=0 value="0" class="form-control text-center w-50 fs-4">
                 <div class="w-25">
                     <label class="actualizar" id="actualizar">$0.00</label>
                 </div>
@@ -296,7 +296,7 @@ function crearComponente(cerrar = true) {
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="backup" min=0 value="0" class="text-center w-50 fs-4">
+                <input type="number" id="backup" min=0 value="0" class="form-control text-center w-50 fs-4">
                 <div class="w-25">
                     <label class="actualizar" id="actualizar">$0.00</label>
                 </div>
@@ -316,7 +316,7 @@ function crearComponente(cerrar = true) {
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="puertos" min=0 value="1" class="text-center w-50 fs-4">
+                <input type="number" id="puertos" min=0 value="1" class="form-control text-center w-50 fs-4">
                 <div class="w-25">
                     <label class="actualizar" id="actualizar">$0.00</label>
                 </div>
@@ -336,7 +336,7 @@ function crearComponente(cerrar = true) {
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="ram" min=0 value="1" class="text-center w-50 fs-4">
+                <input type="number" id="ram" min=0 value="1" class="form-control text-center w-50 fs-4">
                 <div class="w-25">
                     <label class="actualizar" id="actualizar">$0.00</label>
                 </div>

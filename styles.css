@@ -5,6 +5,10 @@ main {
     background-position: center;
 }
 
+#currency {
+    width: 90px;
+}
+
 #agregarComponente {
     width: 50px;
 }
