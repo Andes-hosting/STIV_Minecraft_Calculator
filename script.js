@@ -127,7 +127,7 @@ function actualizarEtiqueta3(input, label, sub) {
 
 //Función que calcula el valor total de todos los subtotales de los componentes
 function calcularTotal(){
-    const subtotales = document.querySelectorAll(".actualizar");
+    const subtotales = document.querySelectorAll("#actualizar");
     let total = 0;
 
     /* let e = document.getElementById("primerdescuento");
@@ -165,7 +165,7 @@ function calcularTotal(){
 }
 
 function changeLabelCurrency(){
-    const labels = document.querySelectorAll(".actualizar");
+    const labels = document.querySelectorAll("#actualizar");
     const inputs = document.querySelectorAll("input");
     const subs = document.querySelectorAll("#subtotal .subtotal");
     for (i = 0; i < inputs.length; i++){
@@ -185,6 +185,7 @@ function crearComponente(cerrar = true) {
     // Crear el componente
     const componente = document.createElement("div");
     componente.className = "tarjeta";
+    componente.id = "tarjeta"
     componente.innerHTML = `
         <h2 class="p-3 display-5 display-font-3 fs-1 fw-bold">Servidor Minecraft Java vanilla | 1GB</h2>
         <hr class="hr-blurry">
@@ -193,6 +194,7 @@ function crearComponente(cerrar = true) {
             <label class="textos">
                 Servidor Minecraft
                 <i class="icon-info-sign fs-6" 
+                    id="iconInfo"
                     data-bs-toggle="popover" 
                     data-bs-content="Estas opciones tenemos disponibles para que uses como base de tu nuevo Servidor de Minecraft, si no sabes cuál quieres puedes elegir 'Vanilla' y después hablar con nosotros para que te ayudemos en la elección." 
                     data-bs-trigger="hover"
@@ -203,7 +205,7 @@ function crearComponente(cerrar = true) {
             </label>
             </div>
             <div class="d-flex flex-row align-items-center justify-content-center" id="ante">
-                <select class="text-center w-50 fs-4" id="versions">
+                <select class="form-select text-center w-50 fs-4" id="versions">
                     <optgroup label="Minecraft Java">
                         <option value="Java-Java Vanilla" selected>Java Vanilla</option>
                         <option value="Java-Bungeecord">Bungeecord</option>
@@ -242,9 +244,10 @@ function crearComponente(cerrar = true) {
             </div>
         </div>
         <div class="fs-4" id="etiquetas">
-            <label class="texto">
+            <label class="texto" id="texto">
                 Almacenamiento (GB)
                 <i class="icon-info-sign fs-6" 
+                    id="iconInfo"
                     data-bs-toggle="popover" 
                     data-bs-content="En general no necesitas más de 4GB a menos que uses muchos mods o tengas muchos jugadores en tu Server, puedes seleccionar 4 y más adelante aumentarlo según tus necesidades." 
                     data-bs-trigger="hover"
@@ -254,16 +257,17 @@ function crearComponente(cerrar = true) {
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="almacenamiento" min=0 value="4" class="text-center w-50 fs-4">
+                <input type="number" id="almacenamiento" min=0 value="4" class="form-control text-center w-50 fs-4">
                 <div class="w-25">
-                    <label class="actualizar" id="almacenamientoLabel">$0.00</label>
+                    <label class="actualizar" id="actualizar">$0.00</label>
                 </div>
             </div>
         </div>
         <div class="fs-4" id="etiquetas">
-            <label class="texto">
+            <label class="texto" id="texto">
                 Bases de Datos
                 <i class="icon-info-sign fs-6" 
+                    id="iconInfo"
                     data-bs-toggle="popover" 
                     data-bs-content="Algunos mods pueden necesitar 1 o más bases de datos, si no lo necesitas en lo inmediato lo puedes agregar más adelante." 
                     data-bs-trigger="hover"
@@ -273,16 +277,17 @@ function crearComponente(cerrar = true) {
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="bd" min=0 value="0" class="text-center w-50 fs-4">
+                <input type="number" id="bd" min=0 value="0" class="form-control text-center w-50 fs-4">
                 <div class="w-25">
-                    <label class="actualizar" id="bdLabel">$0.00</label>
+                    <label class="actualizar" id="actualizar">$0.00</label>
                 </div>
             </div>
         </div>
         <div class="fs-4" id="etiquetas">
-            <label class="texto">
+            <label class="texto" id="texto">
                 Backup
                 <i class="icon-info-sign fs-6" 
+                    id="iconInfo"
                     data-bs-toggle="popover" 
                     data-bs-content="Si quieres tener forma de hacer un respaldo de tu servidor, puedes agregar 1 o más respaldos (backup) después puedes volver en el tiempo de tu servidor al momento en que hiciste el backup." 
                     data-bs-trigger="hover"
@@ -292,16 +297,17 @@ function crearComponente(cerrar = true) {
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="backup" min=0 value="0" class="text-center w-50 fs-4">
+                <input type="number" id="backup" min=0 value="0" class="form-control text-center w-50 fs-4">
                 <div class="w-25">
-                    <label class="actualizar" id="backupLabel">$0.00</label>
+                    <label class="actualizar" id="actualizar">$0.00</label>
                 </div>
             </div>
         </div>
         <div class="fs-4" id="etiquetas">
-            <label class="texto">
+            <label class="texto" id="texto">
                 Puertos
                 <i class="icon-info-sign fs-6" 
+                    id="iconInfo"
                     data-bs-toggle="popover" 
                     data-bs-content="En general un puerto es suficiente a menos que agregues un mod que requiera puertos extras." 
                     data-bs-trigger="hover"
@@ -311,16 +317,17 @@ function crearComponente(cerrar = true) {
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="puertos" min=0 value="1" class="text-center w-50 fs-4">
+                <input type="number" id="puertos" min=0 value="1" class="form-control text-center w-50 fs-4">
                 <div class="w-25">
-                    <label class="actualizar" id="puertosLabel">$0.00</label>
+                    <label class="actualizar" id="actualizar">$0.00</label>
                 </div>
             </div>
         </div>
         <div class="fs-4" id="etiquetas">
-            <label class="texto">
+            <label class="texto" id="texto">
                 RAM (GB)
                 <i class="icon-info-sign fs-6" 
+                    id="iconInfo"
                     data-bs-toggle="popover" 
                     data-bs-content="Dependiendo de la versión de minecraft, mods, plugins y cantidad de usuarios, la cantidad de RAM que necesites puede variar de 1GB en Bedrock Vanilla a 6GB en Java Forge con algunos mods (puedes contactarnos para saber más)." 
                     data-bs-trigger="hover"
@@ -330,9 +337,9 @@ function crearComponente(cerrar = true) {
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="ram" min=0 value="1" class="text-center w-50 fs-4">
+                <input type="number" id="ram" min=0 value="1" class="form-control text-center w-50 fs-4">
                 <div class="w-25">
-                    <label class="actualizar" id="ramLabel">$0.00</label>
+                    <label class="actualizar" id="actualizar">$0.00</label>
                 </div>
             </div>
         </div>
@@ -411,7 +418,7 @@ function crearComponente(cerrar = true) {
 
     // Configurar eventos para las etiquetas independientes de este componente
     const inputs = componente.querySelectorAll("input");
-    const labels = componente.querySelectorAll(".actualizar");
+    const labels = componente.querySelectorAll("#actualizar");
     const sub = componente.querySelector("#subtotal .subtotal");
 
     const h2 = componente.querySelector("h2");
@@ -470,7 +477,7 @@ function minimizarComponente(componente){
 // Funcion para inicializar los popovers
 function inicializarPopovers() {
     // Obtener todos los elementos con la clase icon-info-sign
-    const iconosInfo = document.querySelectorAll('.icon-info-sign');
+    const iconosInfo = document.querySelectorAll('#iconInfo');
 
     // Iterar sobre cada elemento y aplicar la inicialización del popover
     iconosInfo.forEach((icono) => {
@@ -506,8 +513,8 @@ function downloadExcel(){
     let final = [];
 
     entradas = document.querySelectorAll("input");
-    actualizaciones = document.querySelectorAll(".actualizar");
-    etiquetas = document.querySelectorAll(".texto");
+    actualizaciones = document.querySelectorAll("#actualizar");
+    etiquetas = document.querySelectorAll("#texto");
     let totaltotal = 0;
 
     for (let index = 0; index < comps; index++) {
@@ -558,7 +565,7 @@ function downloadExcel(){
 }
 
 function actualizarSubtotal(sub){
-    const inputs = sub.parentNode.parentNode.querySelectorAll(".actualizar");
+    const inputs = sub.parentNode.parentNode.querySelectorAll("#actualizar");
     let subtotal = 0;
     inputs.forEach(function(input) {
         let content = currency === "clp" ? input.textContent.slice(1) : input.textContent.slice(1);
@@ -583,7 +590,7 @@ function main(){
     const subini = componenteInicial.querySelector("#subtotal .subtotal");
     actualizarSubtotal(subini);
     // Escucha los evento de click en el boton + para agregar otro componente
-    document.querySelector(".agregarComponente").addEventListener("click", function() {
+    document.querySelector("#containerAddComponent button").addEventListener("click", function() {
         const contenedor = document.getElementById("contenedor");
         const nuevoComponente = crearComponente();
         contenedor.appendChild(nuevoComponente);
@@ -596,7 +603,7 @@ function main(){
 
     // Actualizar etiquetas al inicio para los valores bases de cada item
     const inputs2 = document.querySelectorAll("input");
-    const labels2 = document.querySelectorAll(".actualizar");
+    const labels2 = document.querySelectorAll("#actualizar");
     const sub = document.querySelector("#subtotal .subtotal");
     for (let i = 0; i < inputs2.length; i++) {
         actualizarEtiqueta3(inputs2[i], labels2[i],sub);

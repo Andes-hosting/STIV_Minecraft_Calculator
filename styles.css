@@ -5,11 +5,15 @@ main {
     background-position: center;
 }
 
+#currency {
+    width: 90px;
+}
+
 #agregarComponente {
     width: 50px;
 }
 /* #contenedor, #componenteInicial */
-.tarjeta {
+#tarjeta {
     border: 3px solid #ccc;
     padding: 20px;
     width: auto;
@@ -19,6 +23,7 @@ main {
     position: relative;
     justify-content: center;
     height: auto;
+    border-radius: 0.375rem;
 }
 
 #results {

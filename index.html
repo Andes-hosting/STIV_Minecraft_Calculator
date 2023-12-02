@@ -12,18 +12,18 @@
 </head>
 <body>
     <main>
-    <nav class="navbar bg-primary bg-opacity-75">
-        <div class="container">
+    <nav class="navbar bg-primary bg-opacity-75 p-1">
+        <div class="container m-1 p-0 px-4">
           <a class="navbar-brand" href="#">
-            <img src="ElcajaritoLQ.png" alt="Bootstrap" width="72" height="72">
+            <img src="STIV4RRSS.png" alt="Bootstrap" width="72" height="72">
           </a>
         </div>
     </nav>
     <div class="w-75">
-        <div class="d-flex flex-row-reverse p-2 fs-5">
-            <select name="currency" id="currency">
-                <option value="usd" id="usd">USD</option>
-                <option value="clp" id="clp" selected>CLP</option>
+        <div class="d-flex flex-row-reverse p-2 fs-5 align-items-center">
+            <select class="form-select fs-5 text-center" name="currency" id="currency">
+                <option class="text-start" value="clp" id="clp" selected>CLP</option>
+                <option class="text-start" value="usd" id="usd">USD</option>                
             </select>
         </div>
     </div>
@@ -33,7 +33,10 @@
         <div id="componenteInicial" class="w-50"></div>
         
         <div id="contenedor" class="w-50"></div>
-        <button id="agregarComponente b1" class="agregarComponente m-1 btn btn-primary">+ Otro servidor</button>
+
+        <div id="containerAddComponent">
+            <button id="agregarComponente b1" class="agregarComponente m-1 btn btn-primary b1">+ Otro servidor</button>
+        </div>  
 
         <!-- Primer descuento(personalizado) -->
         <!-- <div class="descuentoPersonalizado">            
@@ -57,7 +60,7 @@
         <div class="d-block w-50" id="segundobloque">            
             <label for="SegundoDescuento" class="d-block m-1 fs-4">Plan de Suscripción</label>
             <div class="d-flex flex-row align-items-center justify-content-center">
-                <select id="segundodescuento" class="text-center m-1 fs-4 w-75">
+                <select id="segundodescuento" class="form-select text-center m-1 fs-4 w-75">
                     <option value="0" selected="selected">Mensual (1 mes)</option>
                     <option value="4.5">Trimestral (3 meses)</option>
                     <option value="10">Anual (12 meses)</option>
@@ -72,7 +75,7 @@
     <button id="calcularTotal" class="d-block mx-auto m-2 btn btn-primary">Calcular Total</button>
 
     <div class="d-flex justify-content-center" id="secondSection">
-        <div class="border border-white border-2 m-2" id="results">
+        <div class="border border-white border-2 rounded m-2" id="results">
             <label id="descuntoTotal" class="d-block"></label>
             <label id="totalMes" class="d-block"></label>
             <div id="totalLabel" class="d-block"></div>
