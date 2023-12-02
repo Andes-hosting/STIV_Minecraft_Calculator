@@ -76,10 +76,21 @@ function actualizarEtiqueta(input, label, sub) {
                 subtotal = subtotal.toFixed(2);
             }
         }
-        
+        console.log(subtotal);
         //Se actualiza la label con el valor calculado arriba
-        subtotal = currency === "clp" ? subtotal.slice(0,-3) : subtotal;
-        label.textContent = "$" + subtotal;
+        if (currency === "clp") {
+            if(subtotal == 0) {
+                label.textContent = "$0"
+            } else {
+                label.textContent = "$" + subtotal.slice(0,-3);
+            }
+        } else {
+            if(subtotal == 0) {
+                label.textContent = "$0.00"
+            } else {
+                label.textContent = "$" + subtotal;
+            }
+        }
 
         actualizarSubtotal(sub);
         calcularTotal();
