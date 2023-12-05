@@ -20,8 +20,17 @@ body {
 /* #agregarComponente {
     width: 50px;
 } */
-#contenedor, #componenteInicial {
+
+#segundodescuento {
     width: 50%;
+}
+
+#discountLabel {
+    width: 25%;
+}
+
+#contenedor, #componenteInicial {
+    width: 40%;
 }
 
 #tarjeta {
@@ -49,6 +58,7 @@ body {
 
 #segundobloque {
     padding: 20px;
+    width: 50%;
 }
 
 h2 {
@@ -188,4 +198,76 @@ nav {
     background-color: #00000045;
     margin-bottom: 30px;
     height: auto;
+}
+
+@media (max-width: 1700px) {
+    #contenedor, #componenteInicial {
+        width: 50%;
+    }
+    #segundobloque {
+        width: 50%;
+    }
+}
+
+@media (max-width: 1400px) {
+    #contenedor, #componenteInicial {
+        width: 60%;
+    }
+}
+
+@media (max-width: 1100px) {
+    #contenedor, #componenteInicial {
+        width: 70%;
+    }
+
+    #segundobloque {
+        width: 60%;
+    }
+}
+
+@media (max-width: 900px) {
+    #segundobloque {
+        width: 70%;
+    }
+
+    #secondSection {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 800px) {
+    #contenedor, #componenteInicial {
+        width: 80%;
+    }
+}
+
+@media (max-width: 700px) {
+    #segundobloque {
+        width: 80%;
+    }
+
+    #segundodescuento {
+        width: 60%;
+    }
+    
+    #discountLabel {
+        width: 30%;
+    }
+}
+
+@media (max-width: 600px) {
+    #contenedor, #componenteInicial {
+        width: 100%;
+    }
+
+    #segundobloque {
+        width: 90%;
+    }
+
+}
+
+@media (max-width: 550px) {
+    #segundobloque {
+        width: 100%;
+    }
 }
