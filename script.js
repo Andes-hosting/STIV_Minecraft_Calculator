@@ -198,7 +198,12 @@ function crearComponente(cerrar = true) {
     componente.className = "tarjeta";
     componente.id = "tarjeta"
     componente.innerHTML = `
-        <h2 class="p-3 display-5 display-font-3 fs-1 fw-bold">Servidor Minecraft Java Vanilla | 1GB</h2>
+        <div>
+            <h2 class="p-3 display-5 display-font-3 fs-1 fw-bold">Servidor Minecraft Java Vanilla</h2>
+            <div>
+                <span id="textRam" class="badge rounded-pill fs-2 m-1">1GB RAM</span>
+            </div>
+        </div>
         <hr class="hr-blurry">
         <div class="fs-4" id="etiquetas">
             <div class="">
@@ -433,6 +438,8 @@ function crearComponente(cerrar = true) {
     const sub = componente.querySelector("#subtotal .subtotal");
 
     const h2 = componente.querySelector("h2");
+    const ramText = componente.querySelector("#textRam");
+
     const vers = componente.querySelector("select.text-center");
     const ramInput = componente.querySelector("#ram");
 
@@ -453,7 +460,8 @@ function crearComponente(cerrar = true) {
     
     // Función para actualizar el texto del elemento <h2>
     function actualizarH2(version, ram) {
-        h2.textContent = "Servidor Minecraft " + version + " | " + ram + "GB";
+        h2.textContent = "Servidor Minecraft " + version;
+        ramText.textContent = ram + "GB RAM"
     }
 
     return componente;

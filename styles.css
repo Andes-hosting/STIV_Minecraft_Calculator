@@ -53,6 +53,11 @@ h2 {
     font-size: auto;
 }
 
+#textRam {
+    color: white;
+    border: 3px solid white;
+}
+
 /* .etiquetas {
     margin: 10px 0;
     flex-direction: row;
