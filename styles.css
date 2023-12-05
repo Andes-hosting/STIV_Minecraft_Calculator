@@ -20,7 +20,10 @@ body {
 /* #agregarComponente {
     width: 50px;
 } */
-/* #contenedor, #componenteInicial */
+#contenedor, #componenteInicial {
+    width: 50%;
+}
+
 #tarjeta {
     /* border: 3px solid #ccc; */
     padding: 20px;
