@@ -13,13 +13,13 @@
 <body>
     <main>
     <nav class="navbar bg-opacity-75 p-1">
-        <div class="container m-1 p-0 px-4">
+        <div class="m-1 p-0 px-4">
             <a class="navbar-brand" href="#">
                 <img src="victor stiv.svg" alt="Bootstrap" width="90" height="90">
             </a>
         </div>
         <div class="">
-            <div class="d-flex flex-column p-2 fs-5 align-items-center">
+            <div class="d-flex flex-row p-2 fs-5 align-items-center">
                 <select class="form-select fs-5 text-center" name="currency" id="currency">
                     <option class="text-start" value="clp" id="clp" selected>CLP</option>
                     <option class="text-start" value="usd" id="usd">USD</option>                
@@ -31,9 +31,9 @@
 
     <div class="d-flex flex-column justify-content-center align-items-center h-auto">
         
-        <div id="componenteInicial" class="w-50"></div>
+        <div id="componenteInicial" class=""></div>
         
-        <div id="contenedor" class="w-50"></div>
+        <div id="contenedor" class=""></div>
 
         <div id="containerAddComponent">
             <button id="agregarComponente" class="btn btn-primary m-1" type="button">+ Otro servidor</button>
@@ -73,8 +73,6 @@
             </div>
         </div>
     </div>
-
-    <button id="calcularTotal" class="d-block mx-auto m-2 btn btn-primary">Calcular Total</button>
 
     <div class="d-flex justify-content-center" id="secondSection">
         <div class="rounded m-2" id="results">

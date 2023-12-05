@@ -599,6 +599,7 @@ function changeDiscount(){
     const discount = document.getElementById("segundodescuento").value;
     const labelChange = document.getElementById("changeDiscount");
     labelChange.textContent = "Dscto " + discount + "%";
+    calcularTotal();
 }
 
 //Pone en order las funciones llamadas al inicio de la página
@@ -630,8 +631,6 @@ function main(){
 
     // Escucha los eventos de cambio de moneda
     document.getElementById("currency").addEventListener("change", changeCurrency);
-    // Escucha los eventos de click en el boton de calcular total
-    document.getElementById("calcularTotal").addEventListener("click",calcularTotal);
     // Escucha los eventos de click en el boton para descargar el excel con los valores de la calculadora
     document.getElementById("excel").addEventListener("click", downloadExcel);
     // Escucha los eventos de cambio del descuento por meses y llama al funcion changeDiscount
