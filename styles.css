@@ -179,6 +179,16 @@ footer {
     margin-top: 20px;
 }
 
+footer span {
+    color: white;
+    border: 2px solid white;
+}
+
+/* footer button span a:hover {
+    color: #4b1e4b;
+    border-color: #330033;
+} */
+
 footer a{
     text-decoration: none;
     color: white;
@@ -247,17 +257,17 @@ nav {
     }
 
     #segundodescuento {
-        width: 60%;
+        width: 55%;
     }
     
     #discountLabel {
-        width: 30%;
+        width: 35%;
     }
 }
 
 @media (max-width: 600px) {
     #contenedor, #componenteInicial {
-        width: 100%;
+        width: 90%;
     }
 
     #segundobloque {
