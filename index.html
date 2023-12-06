@@ -2,82 +2,90 @@
 <html>
 <head>
     <title>Calculadora</title>
-    
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="shortcut icon" href="ElcajaritoLQ.png" />
 </head>
 <body>
     <main>
+    <!-- Navbar -->
     <nav class="navbar bg-opacity-75 p-1">
         <div class="m-1 p-0 px-4">
             <a class="navbar-brand" href="#">
+                <!-- Logo -->
                 <img src="assets/images/Logo.svg" alt="" width="90" height="90">
             </a>
         </div>
         <div class="">
             <div class="d-flex flex-row p-2 fs-5 align-items-center">
+                <!-- Currency dropdown -->
                 <select class="form-select fs-5 text-center" name="currency" id="currency">
+                    <!-- CLP -->
                     <option class="text-start" value="clp" id="clp" selected>CLP</option>
-                    <option class="text-start" value="usd" id="usd">USD</option>                
+                    <!-- USD -->
+                    <option class="text-start" value="usd" id="usd">USD</option>
                 </select>
             </div>
         </div>
     </nav>
-    
-
     <div class="d-flex flex-column justify-content-center align-items-center h-auto">
-        
+        <!-- Initial component -->
         <div id="componenteInicial" class=""></div>
-        
+        <!-- Container for added components -->
         <div id="contenedor" class=""></div>
-
+        <!-- Add components button -->
         <div id="containerAddComponent">
             <button id="agregarComponente" class="btn btn-primary m-1" type="button">+ Otro servidor</button>
-        </div>  
-
-        <!-- Segundo descuento(1mes,3meses,1año) -->
-        <div class="d-block align-items-center justify-content-center" id="segundobloque">            
+        </div>
+        <!-- Discount(1 month, 3 months, 1 year) -->
+        <div class="d-block align-items-center justify-content-center" id="segundobloque">
             <label for="SegundoDescuento" class="d-block m-3 fs-4">Plan de Suscripción</label>
             <div class="d-flex flex-row align-items-center justify-content-center align-self-center">
                 <select id="segundodescuento" class="form-select text-center m-1 fs-4">
+                    <!-- 1 month -->
                     <option value="0" selected="selected">Mensual (1 mes)</option>
+                    <!-- 3 months -->
                     <option value="4.5">Trimestral (3 meses)</option>
+                    <!-- 1 year -->
                     <option value="10">Anual (12 meses)</option>
                 </select>
                 <div class="p-1 m-0" id="discountLabel">
+                    <!-- Discount label -->
                     <label id="changeDiscount" class="fs-4">Dscto 0%</label>
                 </div>
             </div>
         </div>
     </div>
-    
     <div class="d-flex justify-content-center align-items-center" id="secondSection">
+        <!-- Results section -->
         <div class="rounded m-2 flex-row" id="results">
+            <!-- Discount label applied -->
             <label id="descuntoTotal" class="d-block"></label>
+            <!-- Price per month -->
             <label id="totalMes" class="d-block"></label>
+            <!-- Final price -->
             <div id="totalLabel" class="d-block"></div>
         </div>
+        <!-- Download excel button -->
         <div class="align-items-center m-2 flex-row" id="excelContainer">
             <button id="excel" class="btn btn-primary">Descargar calculo en excel</button>
-        </div>            
+        </div>
     </div>
     </main>
-    
+    <!-- Footer -->
     <footer class="fs-4">
         <h3 class="fs-2">Contáctanos</h3>
         <p>Y comienza tu prueba gratis de 3 dias</p>
+        <!-- Contact link -->
         <button type="button" class="btn mt-1 mb-1">
             <span class="badge fs-4">
                 <a href="https://link.stiv.tech" id="linkContact">Contacta STIV</a>
             </span>
-        </button>        
+        </button>
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
 </body>
 </html>

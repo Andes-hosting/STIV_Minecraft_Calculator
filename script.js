@@ -58,10 +58,10 @@ function actualizarEtiqueta(input, label, sub) {
             }
             else if(unitario < 12){
                 subtotal = unitario - 2;
-                subtotal = subtotal * optionsRam[1];                
-                subtotal = optionsRam[0] - subtotal;                
+                subtotal = subtotal * optionsRam[1];
+                subtotal = optionsRam[0] - subtotal;
                 subtotal = subtotal * unitario;
-                subtotal = subtotal.toFixed(2);                
+                subtotal = subtotal.toFixed(2);
             }else{
                 subtotal = optionsRam[2] * unitario;
                 subtotal = subtotal.toFixed(2);
@@ -71,7 +71,7 @@ function actualizarEtiqueta(input, label, sub) {
             if(unitario <= base[item]){
                 subtotal = 0;
             } else{
-                subtotal = unitario - base[item];                
+                subtotal = unitario - base[item];
                 subtotal = subtotal * moneda[item];
                 subtotal = subtotal.toFixed(2);
             }
@@ -110,10 +110,10 @@ function actualizarEtiqueta3(input, label, sub) {
         }
         else if(unitario < 12){
             subtotal = unitario - 2;
-            subtotal = subtotal * optionsRam[1];                
-            subtotal = optionsRam[0] - subtotal;                
+            subtotal = subtotal * optionsRam[1];
+            subtotal = optionsRam[0] - subtotal;
             subtotal = subtotal * unitario;
-            subtotal = subtotal.toFixed(2);                
+            subtotal = subtotal.toFixed(2);
         }else{
             subtotal = optionsRam[2] * unitario;
             subtotal = subtotal.toFixed(2);
@@ -124,7 +124,7 @@ function actualizarEtiqueta3(input, label, sub) {
             subtotal = 0;
             subtotal = subtotal.toFixed(2);
         } else{
-            subtotal = unitario - base[item];                
+            subtotal = unitario - base[item];
             subtotal = subtotal * moneda[item];
             subtotal = subtotal.toFixed(2);
         }
@@ -133,7 +133,7 @@ function actualizarEtiqueta3(input, label, sub) {
     label.textContent = currency === "clp" ? "$"+subtotal.slice(0,-3) : "$"+subtotal;
     for (let i=0; i < sub.length; i++){
         actualizarSubtotal(sub[i]);
-    }    
+    }
 }
 
 //Función que calcula el valor total de todos los subtotales de los componentes
@@ -181,7 +181,7 @@ function changeLabelCurrency(){
     const subs = document.querySelectorAll("#subtotal .subtotal");
     for (i = 0; i < inputs.length; i++){
         actualizarEtiqueta3(inputs[i], labels[i], subs)
-    }    
+    }
 }
 
 function changeCurrency(){
@@ -209,14 +209,14 @@ function crearComponente(cerrar = true) {
             <div class="">
             <label class="textos">
                 Servidor Minecraft
-                <i class="icon-info-sign fs-6" 
+                <i class="icon-info-sign fs-6"
                     id="iconInfo"
-                    data-bs-toggle="popover" 
-                    data-bs-content="Estas opciones tenemos disponibles para que uses como base de tu nuevo Servidor de Minecraft, si no sabes cuál quieres puedes elegir 'Vanilla' y después hablar con nosotros para que te ayudemos en la elección." 
+                    data-bs-toggle="popover"
+                    data-bs-content="Estas opciones tenemos disponibles para que uses como base de tu nuevo Servidor de Minecraft, si no sabes cuál quieres puedes elegir 'Vanilla' y después hablar con nosotros para que te ayudemos en la elección."
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
-                    data-bs-placement="auto">            
+                    data-bs-placement="auto">
                 </i>
             </label>
             </div>
@@ -262,14 +262,14 @@ function crearComponente(cerrar = true) {
         <div class="fs-4" id="etiquetas">
             <label class="texto" id="texto">
                 Almacenamiento (GB)
-                <i class="icon-info-sign fs-6" 
+                <i class="icon-info-sign fs-6"
                     id="iconInfo"
-                    data-bs-toggle="popover" 
-                    data-bs-content="En general no necesitas más de 4GB a menos que uses muchos mods o tengas muchos jugadores en tu Server, puedes seleccionar 4 y más adelante aumentarlo según tus necesidades." 
+                    data-bs-toggle="popover"
+                    data-bs-content="En general no necesitas más de 4GB a menos que uses muchos mods o tengas muchos jugadores en tu Server, puedes seleccionar 4 y más adelante aumentarlo según tus necesidades."
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
-                    data-bs-placement="auto">            
+                    data-bs-placement="auto">
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
@@ -282,14 +282,14 @@ function crearComponente(cerrar = true) {
         <div class="fs-4" id="etiquetas">
             <label class="texto" id="texto">
                 Bases de Datos
-                <i class="icon-info-sign fs-6" 
+                <i class="icon-info-sign fs-6"
                     id="iconInfo"
-                    data-bs-toggle="popover" 
-                    data-bs-content="Algunos mods pueden necesitar 1 o más bases de datos, si no lo necesitas en lo inmediato lo puedes agregar más adelante." 
+                    data-bs-toggle="popover"
+                    data-bs-content="Algunos mods pueden necesitar 1 o más bases de datos, si no lo necesitas en lo inmediato lo puedes agregar más adelante."
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
-                    data-bs-placement="auto">            
+                    data-bs-placement="auto">
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
@@ -302,14 +302,14 @@ function crearComponente(cerrar = true) {
         <div class="fs-4" id="etiquetas">
             <label class="texto" id="texto">
                 Backup
-                <i class="icon-info-sign fs-6" 
+                <i class="icon-info-sign fs-6"
                     id="iconInfo"
-                    data-bs-toggle="popover" 
-                    data-bs-content="Si quieres tener forma de hacer un respaldo de tu servidor, puedes agregar 1 o más respaldos (backup) después puedes volver en el tiempo de tu servidor al momento en que hiciste el backup." 
+                    data-bs-toggle="popover"
+                    data-bs-content="Si quieres tener forma de hacer un respaldo de tu servidor, puedes agregar 1 o más respaldos (backup) después puedes volver en el tiempo de tu servidor al momento en que hiciste el backup."
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
-                    data-bs-placement="auto">            
+                    data-bs-placement="auto">
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
@@ -322,14 +322,14 @@ function crearComponente(cerrar = true) {
         <div class="fs-4" id="etiquetas">
             <label class="texto" id="texto">
                 Puertos
-                <i class="icon-info-sign fs-6" 
+                <i class="icon-info-sign fs-6"
                     id="iconInfo"
-                    data-bs-toggle="popover" 
-                    data-bs-content="En general un puerto es suficiente a menos que agregues un mod que requiera puertos extras." 
+                    data-bs-toggle="popover"
+                    data-bs-content="En general un puerto es suficiente a menos que agregues un mod que requiera puertos extras."
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
-                    data-bs-placement="auto">            
+                    data-bs-placement="auto">
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
@@ -342,14 +342,14 @@ function crearComponente(cerrar = true) {
         <div class="fs-4" id="etiquetas">
             <label class="texto" id="texto">
                 RAM (GB)
-                <i class="icon-info-sign fs-6" 
+                <i class="icon-info-sign fs-6"
                     id="iconInfo"
-                    data-bs-toggle="popover" 
-                    data-bs-content="Dependiendo de la versión de minecraft, mods, plugins y cantidad de usuarios, la cantidad de RAM que necesites puede variar de 1GB en Bedrock Vanilla a 6GB en Java Forge con algunos mods (puedes contactarnos para saber más)." 
+                    data-bs-toggle="popover"
+                    data-bs-content="Dependiendo de la versión de minecraft, mods, plugins y cantidad de usuarios, la cantidad de RAM que necesites puede variar de 1GB en Bedrock Vanilla a 6GB en Java Forge con algunos mods (puedes contactarnos para saber más)."
                     data-bs-trigger="hover"
                     data-bs-auto-close="outside"
                     data-bs-html="true"
-                    data-bs-placement="auto">            
+                    data-bs-placement="auto">
                 </i>
             </label>
             <div class="d-flex flex-row align-items-center justify-content-center">
@@ -426,11 +426,11 @@ function crearComponente(cerrar = true) {
     // Agregar el componente al DOM
     document.body.appendChild(componente);
 
-    
+
 
     //Inicializar los popovers
     inicializarPopovers();
-    
+
 
     // Configurar eventos para las etiquetas independientes de este componente
     const inputs = componente.querySelectorAll("input");
@@ -453,11 +453,11 @@ function crearComponente(cerrar = true) {
         actualizarH2(selectedOption.text, ramInput.value);
     });
 
-    for (let i = 0; i < inputs.length; i++) {        
+    for (let i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener("input", actualizarEtiqueta(inputs[i], labels[i], sub));
         actualizarEtiqueta3(inputs[i], labels[i],sub);
     }
-    
+
     // Función para actualizar el texto del elemento <h2>
     function actualizarH2(version, ram) {
         h2.textContent = "Servidor Minecraft " + version;
@@ -490,7 +490,7 @@ function minimizarComponente(componente){
         }
     });
 
-    
+
 }
 
 // Funcion para inicializar los popovers
@@ -525,7 +525,7 @@ function setCurrency(){
     currency="usd";
 }
 
-function downloadExcel(){  
+function downloadExcel(){
     const opt = document.querySelectorAll("#ante .text-center")
     comps = opt.length;
 
@@ -568,7 +568,7 @@ function downloadExcel(){
         dis2 = "1 año";
         totaltotal = totaltotal * 12;
     }
-    
+
     final.push([,"Sub-total Final", "$" + totaltotal, "Por "+ dis2]);
     let descuento = totaltotal - ((1 - ((Number(aux2))/100)) * totaltotal);
     final.push([, "Descuento", aux2 + "%", "$-" + descuento,"Descuento por " + dis2]);
