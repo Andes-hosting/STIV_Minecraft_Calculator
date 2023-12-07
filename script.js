@@ -43,14 +43,21 @@ const discounts = {
 
 let currency = "clp"
 
-//Función que actualiza los precios en relación al input numerico
-function actualizarEtiqueta(input, label, sub) {
-    return function() {
-        item = input.getAttribute('id');
-        unitario = Number(input.value);
-        subtotal = 0
-        moneda = currency === "clp" ? clp : usd
-        optionsRam = currency === "clp" ? [ram[1], ram[2], ram[3]] : [ram[4], ram[5], ram[6]];
+class LabelUpdater {
+    constructor(input, label, comp) {
+        this.input = input;
+        this.label = label;
+        this.comp =comp
+
+        this.input.addEventListener('input', () => this.update());
+    }
+
+    update() {
+        const item = this.input.getAttribute('id');
+        const unitario = Number(this.input.value);
+        let subtotal = 0;
+        const moneda = currency === "clp" ? clp : usd;
+        const optionsRam = currency === "clp" ? [ram[1], ram[2], ram[3]] : [ram[4], ram[5], ram[6]];
         if(item == 'ram'){
             if(unitario === 1){
                 subtotal = optionsRam[0];
@@ -70,31 +77,35 @@ function actualizarEtiqueta(input, label, sub) {
             //Formula para calcular el valor de cada componente del servidor que no sea la ram
             if(unitario <= base[item]){
                 subtotal = 0;
+                //aqui
             } else{
                 subtotal = unitario - base[item];
                 subtotal = subtotal * moneda[item];
+                console.log(moneda[item]);
                 subtotal = subtotal.toFixed(2);
             }
         }
-        console.log(subtotal);
         //Se actualiza la label con el valor calculado arriba
-        if (currency === "clp") {
-            if(subtotal == 0) {
-                label.textContent = "$0"
-            } else {
-                label.textContent = "$" + subtotal.slice(0,-3);
-            }
+        if (currency === "clp"){
+            this.label.textContent = subtotal == 0 ? "$0" : "$" + subtotal.slice(0, -3);
         } else {
-            if(subtotal == 0) {
-                label.textContent = "$0.00"
-            } else {
-                label.textContent = "$" + subtotal;
-            }
+            this.label.textContent = subtotal == 0 ? "$0.00" : "$" + subtotal;
         }
 
-        actualizarSubtotal(sub);
+        this.updateSub();
         calcularTotal();
-    };
+    }
+
+    updateSub() {
+        const inputs = this.comp.parentNode.parentNode.querySelectorAll("#actualizar");
+        let subtotal = 0;
+        inputs.forEach(input => {
+            let content = currency === "clp" ? input.textContent.slice(1) : input.textContent.slice(1);
+            subtotal += parseFloat(content);
+        });
+        subtotal = subtotal.toFixed(2);
+        this.comp.textContent = currency === "clp" ? 'Subtotal: $' + subtotal.slice(0,-3) : 'Subtotal: $' + subtotal;
+    }
 }
 
 function actualizarEtiqueta3(input, label, sub) {
@@ -140,9 +151,6 @@ function actualizarEtiqueta3(input, label, sub) {
 function calcularTotal(){
     const subtotales = document.querySelectorAll("#actualizar");
     let total = 0;
-
-    /* let e = document.getElementById("primerdescuento");
-    let discount1 = e.value; */
 
     e = document.getElementById("segundodescuento");
     let discount2 = e.value;
@@ -410,7 +418,6 @@ function crearComponente(cerrar = true) {
     iconSvg.setAttribute('height', '16');
     iconSvg.setAttribute('width', '16');
     iconSvg.setAttribute('viewBox', '0 0 512 512');
-    //iconSvg.classList.add('post-icon');
 
     iconPath.setAttribute(
         'd',
@@ -454,8 +461,7 @@ function crearComponente(cerrar = true) {
     });
 
     for (let i = 0; i < inputs.length; i++) {
-        inputs[i].addEventListener("input", actualizarEtiqueta(inputs[i], labels[i], sub));
-        actualizarEtiqueta3(inputs[i], labels[i],sub);
+        let uplab = new LabelUpdater(inputs[i], labels[i], sub)
     }
 
     // Función para actualizar el texto del elemento <h2>
