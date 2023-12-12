@@ -43,6 +43,175 @@ const discounts = {
 
 let currency = "clp"
 
+const componentTemplate = `
+<div>
+    <h2 class="p-3 display-5 display-font-3 fs-1 fw-bold">Servidor Minecraft Java Vanilla</h2>
+    <div>
+        <span id="textRam" class="badge rounded-pill fs-2 m-1">1GB RAM</span>
+    </div>
+</div>
+<hr class="hr-blurry">
+<div class="fs-4" id="etiquetas">
+    <div class="">
+    <label class="textos">
+        Servidor Minecraft
+        <i class="icon-info-sign fs-6"
+            id="iconInfo"
+            data-bs-toggle="popover"
+            data-bs-content="Estas opciones tenemos disponibles para que uses como base de tu nuevo Servidor de Minecraft, si no sabes cuál quieres puedes elegir 'Vanilla' y después hablar con nosotros para que te ayudemos en la elección."
+            data-bs-trigger="hover"
+            data-bs-auto-close="outside"
+            data-bs-html="true"
+            data-bs-placement="auto">
+        </i>
+    </label>
+    </div>
+    <div class="d-flex flex-row align-items-center justify-content-center" id="ante">
+        <select class="form-select text-center w-50 fs-4" id="versions">
+            <optgroup label="Minecraft Java">
+                <option value="Java-Java Vanilla" selected>Java Vanilla</option>
+                <option value="Java-Bungeecord">Bungeecord</option>
+                <option value="Java-Cuberite">Cuberite</option>
+                <option value="Java-CurseForge">CurseForge</option>
+                <option value="Java-Fabric">Fabric</option>
+                <option value="Java-Feather">Feather</option>
+                <option value="Java-Forge">Forge</option>
+                <option value="Java-Feed The Beast">Feed The Beast</option>
+                <option value="Java-Glowstone">Glowstone</option>
+                <option value="Java-Limbo">Limbo</option>
+                <option value="Java-Krypton">Krypton</option>
+                <option value="Java-Magma">Magma</option>
+                <option value="Java-Modrinth">Modrinth</option>
+                <option value="Java-Mohist">Mohist</option>
+                <option value="Java-NanoLimbo">NanoLimbo</option>
+                <option value="Java-Paper">Paper</option>
+                <option value="Java-Folia">Folia</option>
+                <option value="Java-Purpur">Purpur</option>
+                <option value="Java-Quilt">Quilt</option>
+                <option value="Java-Spigot">Spigot</option>
+                <option value="Java-SpongeForge" disabled>SpongeForge</option>
+                <option value="Java-SpongeVanilla">SpongeVanilla</option>
+                <option value="Java-Technic">Technic</option>
+                <option value="Java-VanillaCord">VanillaCord</option>
+            </optgroup>
+            <optgroup label="Minecraft Bedrock">
+                <option value="Bedrock-Bedrock Vanilla">Bedrock Vanilla</option>
+                <option value="Bedrock-gomint">gomint</option>
+                <option value="Bedrock-LiteLoaderBDS">LiteLoaderBDS</option>
+                <option value="Bedrock-Nukkit">Nukkit</option>
+                <option value="Bedrock-PocketMine">PocketMine MP</option>
+            </optgroup>
+        </select>
+        <div class="w-25"></div>
+    </div>
+</div>
+<div class="fs-4" id="etiquetas">
+    <label class="texto" id="texto">
+        Almacenamiento (GB)
+        <i class="icon-info-sign fs-6"
+            id="iconInfo"
+            data-bs-toggle="popover"
+            data-bs-content="En general no necesitas más de 4GB a menos que uses muchos mods o tengas muchos jugadores en tu Server, puedes seleccionar 4 y más adelante aumentarlo según tus necesidades."
+            data-bs-trigger="hover"
+            data-bs-auto-close="outside"
+            data-bs-html="true"
+            data-bs-placement="auto">
+        </i>
+    </label>
+    <div class="d-flex flex-row align-items-center justify-content-center">
+        <input type="number" id="almacenamiento" min=0 value="4" class="form-control text-center w-50 fs-4">
+        <div class="w-25">
+            <label class="actualizar" id="actualizar">$0.00</label>
+        </div>
+    </div>
+</div>
+<div class="fs-4" id="etiquetas">
+    <label class="texto" id="texto">
+        Bases de Datos
+        <i class="icon-info-sign fs-6"
+            id="iconInfo"
+            data-bs-toggle="popover"
+            data-bs-content="Algunos mods pueden necesitar 1 o más bases de datos, si no lo necesitas en lo inmediato lo puedes agregar más adelante."
+            data-bs-trigger="hover"
+            data-bs-auto-close="outside"
+            data-bs-html="true"
+            data-bs-placement="auto">
+        </i>
+    </label>
+    <div class="d-flex flex-row align-items-center justify-content-center">
+        <input type="number" id="bd" min=0 value="0" class="form-control text-center w-50 fs-4">
+        <div class="w-25">
+            <label class="actualizar" id="actualizar">$0.00</label>
+        </div>
+    </div>
+</div>
+<div class="fs-4" id="etiquetas">
+    <label class="texto" id="texto">
+        Backup
+        <i class="icon-info-sign fs-6"
+            id="iconInfo"
+            data-bs-toggle="popover"
+            data-bs-content="Si quieres tener forma de hacer un respaldo de tu servidor, puedes agregar 1 o más respaldos (backup) después puedes volver en el tiempo de tu servidor al momento en que hiciste el backup."
+            data-bs-trigger="hover"
+            data-bs-auto-close="outside"
+            data-bs-html="true"
+            data-bs-placement="auto">
+        </i>
+    </label>
+    <div class="d-flex flex-row align-items-center justify-content-center">
+        <input type="number" id="backup" min=0 value="0" class="form-control text-center w-50 fs-4">
+        <div class="w-25">
+            <label class="actualizar" id="actualizar">$0.00</label>
+        </div>
+    </div>
+</div>
+<div class="fs-4" id="etiquetas">
+    <label class="texto" id="texto">
+        Puertos
+        <i class="icon-info-sign fs-6"
+            id="iconInfo"
+            data-bs-toggle="popover"
+            data-bs-content="En general un puerto es suficiente a menos que agregues un mod que requiera puertos extras."
+            data-bs-trigger="hover"
+            data-bs-auto-close="outside"
+            data-bs-html="true"
+            data-bs-placement="auto">
+        </i>
+    </label>
+    <div class="d-flex flex-row align-items-center justify-content-center">
+        <input type="number" id="puertos" min=0 value="1" class="form-control text-center w-50 fs-4">
+        <div class="w-25">
+            <label class="actualizar" id="actualizar">$0.00</label>
+        </div>
+    </div>
+</div>
+<div class="fs-4" id="etiquetas">
+    <label class="texto" id="texto">
+        RAM (GB)
+        <i class="icon-info-sign fs-6"
+            id="iconInfo"
+            data-bs-toggle="popover"
+            data-bs-content="Dependiendo de la versión de minecraft, mods, plugins y cantidad de usuarios, la cantidad de RAM que necesites puede variar de 1GB en Bedrock Vanilla a 6GB en Java Forge con algunos mods (puedes contactarnos para saber más)."
+            data-bs-trigger="hover"
+            data-bs-auto-close="outside"
+            data-bs-html="true"
+            data-bs-placement="auto">
+        </i>
+    </label>
+    <div class="d-flex flex-row align-items-center justify-content-center">
+        <input type="number" id="ram" min=0 value="1" class="form-control text-center w-50 fs-4">
+        <div class="w-25">
+            <label class="actualizar" id="actualizar">$0.00</label>
+        </div>
+    </div>
+</div>
+<div class="d-flex flex-column align-items-center" id="subtotal">
+    <label class="subtotal" id="subtotal">
+        Subtotal : $0.00
+    </label>
+</div>
+`;
+
 class LabelUpdater {
     constructor(input, label, comp) {
         this.input = input;
@@ -205,174 +374,7 @@ function crearComponente(cerrar = true) {
     const componente = document.createElement("div");
     componente.className = "tarjeta";
     componente.id = "tarjeta"
-    componente.innerHTML = `
-        <div>
-            <h2 class="p-3 display-5 display-font-3 fs-1 fw-bold">Servidor Minecraft Java Vanilla</h2>
-            <div>
-                <span id="textRam" class="badge rounded-pill fs-2 m-1">1GB RAM</span>
-            </div>
-        </div>
-        <hr class="hr-blurry">
-        <div class="fs-4" id="etiquetas">
-            <div class="">
-            <label class="textos">
-                Servidor Minecraft
-                <i class="icon-info-sign fs-6"
-                    id="iconInfo"
-                    data-bs-toggle="popover"
-                    data-bs-content="Estas opciones tenemos disponibles para que uses como base de tu nuevo Servidor de Minecraft, si no sabes cuál quieres puedes elegir 'Vanilla' y después hablar con nosotros para que te ayudemos en la elección."
-                    data-bs-trigger="hover"
-                    data-bs-auto-close="outside"
-                    data-bs-html="true"
-                    data-bs-placement="auto">
-                </i>
-            </label>
-            </div>
-            <div class="d-flex flex-row align-items-center justify-content-center" id="ante">
-                <select class="form-select text-center w-50 fs-4" id="versions">
-                    <optgroup label="Minecraft Java">
-                        <option value="Java-Java Vanilla" selected>Java Vanilla</option>
-                        <option value="Java-Bungeecord">Bungeecord</option>
-                        <option value="Java-Cuberite">Cuberite</option>
-                        <option value="Java-CurseForge">CurseForge</option>
-                        <option value="Java-Fabric">Fabric</option>
-                        <option value="Java-Feather">Feather</option>
-                        <option value="Java-Forge">Forge</option>
-                        <option value="Java-Feed The Beast">Feed The Beast</option>
-                        <option value="Java-Glowstone">Glowstone</option>
-                        <option value="Java-Limbo">Limbo</option>
-                        <option value="Java-Krypton">Krypton</option>
-                        <option value="Java-Magma">Magma</option>
-                        <option value="Java-Modrinth">Modrinth</option>
-                        <option value="Java-Mohist">Mohist</option>
-                        <option value="Java-NanoLimbo">NanoLimbo</option>
-                        <option value="Java-Paper">Paper</option>
-                        <option value="Java-Folia">Folia</option>
-                        <option value="Java-Purpur">Purpur</option>
-                        <option value="Java-Quilt">Quilt</option>
-                        <option value="Java-Spigot">Spigot</option>
-                        <option value="Java-SpongeForge" disabled>SpongeForge</option>
-                        <option value="Java-SpongeVanilla">SpongeVanilla</option>
-                        <option value="Java-Technic">Technic</option>
-                        <option value="Java-VanillaCord">VanillaCord</option>
-                    </optgroup>
-                    <optgroup label="Minecraft Bedrock">
-                        <option value="Bedrock-Bedrock Vanilla">Bedrock Vanilla</option>
-                        <option value="Bedrock-gomint">gomint</option>
-                        <option value="Bedrock-LiteLoaderBDS">LiteLoaderBDS</option>
-                        <option value="Bedrock-Nukkit">Nukkit</option>
-                        <option value="Bedrock-PocketMine">PocketMine MP</option>
-                    </optgroup>
-                </select>
-                <div class="w-25"></div>
-            </div>
-        </div>
-        <div class="fs-4" id="etiquetas">
-            <label class="texto" id="texto">
-                Almacenamiento (GB)
-                <i class="icon-info-sign fs-6"
-                    id="iconInfo"
-                    data-bs-toggle="popover"
-                    data-bs-content="En general no necesitas más de 4GB a menos que uses muchos mods o tengas muchos jugadores en tu Server, puedes seleccionar 4 y más adelante aumentarlo según tus necesidades."
-                    data-bs-trigger="hover"
-                    data-bs-auto-close="outside"
-                    data-bs-html="true"
-                    data-bs-placement="auto">
-                </i>
-            </label>
-            <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="almacenamiento" min=0 value="4" class="form-control text-center w-50 fs-4">
-                <div class="w-25">
-                    <label class="actualizar" id="actualizar">$0.00</label>
-                </div>
-            </div>
-        </div>
-        <div class="fs-4" id="etiquetas">
-            <label class="texto" id="texto">
-                Bases de Datos
-                <i class="icon-info-sign fs-6"
-                    id="iconInfo"
-                    data-bs-toggle="popover"
-                    data-bs-content="Algunos mods pueden necesitar 1 o más bases de datos, si no lo necesitas en lo inmediato lo puedes agregar más adelante."
-                    data-bs-trigger="hover"
-                    data-bs-auto-close="outside"
-                    data-bs-html="true"
-                    data-bs-placement="auto">
-                </i>
-            </label>
-            <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="bd" min=0 value="0" class="form-control text-center w-50 fs-4">
-                <div class="w-25">
-                    <label class="actualizar" id="actualizar">$0.00</label>
-                </div>
-            </div>
-        </div>
-        <div class="fs-4" id="etiquetas">
-            <label class="texto" id="texto">
-                Backup
-                <i class="icon-info-sign fs-6"
-                    id="iconInfo"
-                    data-bs-toggle="popover"
-                    data-bs-content="Si quieres tener forma de hacer un respaldo de tu servidor, puedes agregar 1 o más respaldos (backup) después puedes volver en el tiempo de tu servidor al momento en que hiciste el backup."
-                    data-bs-trigger="hover"
-                    data-bs-auto-close="outside"
-                    data-bs-html="true"
-                    data-bs-placement="auto">
-                </i>
-            </label>
-            <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="backup" min=0 value="0" class="form-control text-center w-50 fs-4">
-                <div class="w-25">
-                    <label class="actualizar" id="actualizar">$0.00</label>
-                </div>
-            </div>
-        </div>
-        <div class="fs-4" id="etiquetas">
-            <label class="texto" id="texto">
-                Puertos
-                <i class="icon-info-sign fs-6"
-                    id="iconInfo"
-                    data-bs-toggle="popover"
-                    data-bs-content="En general un puerto es suficiente a menos que agregues un mod que requiera puertos extras."
-                    data-bs-trigger="hover"
-                    data-bs-auto-close="outside"
-                    data-bs-html="true"
-                    data-bs-placement="auto">
-                </i>
-            </label>
-            <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="puertos" min=0 value="1" class="form-control text-center w-50 fs-4">
-                <div class="w-25">
-                    <label class="actualizar" id="actualizar">$0.00</label>
-                </div>
-            </div>
-        </div>
-        <div class="fs-4" id="etiquetas">
-            <label class="texto" id="texto">
-                RAM (GB)
-                <i class="icon-info-sign fs-6"
-                    id="iconInfo"
-                    data-bs-toggle="popover"
-                    data-bs-content="Dependiendo de la versión de minecraft, mods, plugins y cantidad de usuarios, la cantidad de RAM que necesites puede variar de 1GB en Bedrock Vanilla a 6GB en Java Forge con algunos mods (puedes contactarnos para saber más)."
-                    data-bs-trigger="hover"
-                    data-bs-auto-close="outside"
-                    data-bs-html="true"
-                    data-bs-placement="auto">
-                </i>
-            </label>
-            <div class="d-flex flex-row align-items-center justify-content-center">
-                <input type="number" id="ram" min=0 value="1" class="form-control text-center w-50 fs-4">
-                <div class="w-25">
-                    <label class="actualizar" id="actualizar">$0.00</label>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex flex-column align-items-center" id="subtotal">
-            <label class="subtotal" id="subtotal">
-                Subtotal : $0.00
-            </label>
-        </div>
-    `;
+    componente.innerHTML = componentTemplate;
 
     //agregar botón par borrar componente
     if(cerrar){
