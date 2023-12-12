@@ -368,89 +368,28 @@ function changeCurrency(){
     calcularTotal();
 }
 
-//Función base que crea el componente de cada tarjeta
-function crearComponente(cerrar = true) {
-    // Crear el componente
-    const componente = document.createElement("div");
-    componente.className = "tarjeta";
-    componente.id = "tarjeta"
-    componente.innerHTML = componentTemplate;
+function createComponentElement() {
+    const component = document.createElement("div");
+    component.className = "tarjeta";
+    component.id = "tarjeta";
+    component.innerHTML = componentTemplate;
+    return component;
+}
 
-    //agregar botón par borrar componente
-    if(cerrar){
-        const botonCerrar = document.createElement("button");
-        botonCerrar.className = "close";
-        botonCerrar.textContent = "";
-        botonCerrar.addEventListener("click", function(){
-            borrarComponente(componente);
-        });
-        componente.appendChild(botonCerrar);
-
-        const iconSvgClose = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        const iconPathClose = document.createElementNS(
-            'http://www.w3.org/2000/svg',
-            'path'
-        );
-        iconSvgClose.setAttribute('height', '16');
-        iconSvgClose.setAttribute('width', '16');
-        iconSvgClose.setAttribute('viewBox', '0 0 384 512');
-
-        iconPathClose.setAttribute(
-            'd',
-            'M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z'
-        );
-
-        iconSvgClose.appendChild(iconPathClose);
-        botonCerrar.appendChild(iconSvgClose);
-    }
-
-    const botonMinimizar = document.createElement("button");
-    botonMinimizar.className = "minimizar";
-    botonMinimizar.textContent = "";
-    botonMinimizar.id = "minimizar";
-    botonMinimizar.addEventListener("click", function(){
-        minimizarComponente(componente);
-    });
-
-    const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    const iconPath = document.createElementNS(
-        'http://www.w3.org/2000/svg',
-        'path'
-    );
-    iconSvg.setAttribute('height', '16');
-    iconSvg.setAttribute('width', '16');
-    iconSvg.setAttribute('viewBox', '0 0 512 512');
-
-    iconPath.setAttribute(
-        'd',
-        'M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z'
-    );
-
-    iconSvg.appendChild(iconPath);
-
-    botonMinimizar.appendChild(iconSvg);
-
-    componente.appendChild(botonMinimizar);
-
-    // Agregar el componente al DOM
-    document.body.appendChild(componente);
-
-
-
+function initializeComponentEvents(component) {
     //Inicializar los popovers
     inicializarPopovers();
 
-
     // Configurar eventos para las etiquetas independientes de este componente
-    const inputs = componente.querySelectorAll("input");
-    const labels = componente.querySelectorAll("#actualizar");
-    const sub = componente.querySelector("#subtotal .subtotal");
+    const inputs = component.querySelectorAll("input");
+    const labels = component.querySelectorAll("#actualizar");
+    const sub = component.querySelector("#subtotal .subtotal");
 
-    const h2 = componente.querySelector("h2");
-    const ramText = componente.querySelector("#textRam");
+    const h2 = component.querySelector("h2");
+    const ramText = component.querySelector("#textRam");
 
-    const vers = componente.querySelector("select.text-center");
-    const ramInput = componente.querySelector("#ram");
+    const vers = component.querySelector("select.text-center");
+    const ramInput = component.querySelector("#ram");
 
     vers.addEventListener('change', function(){
         let selectedOption = this.options[vers.selectedIndex];
@@ -471,8 +410,72 @@ function crearComponente(cerrar = true) {
         h2.textContent = "Servidor Minecraft " + version;
         ramText.textContent = ram + "GB RAM"
     }
+}
 
-    return componente;
+function createComponent(close = true) {
+    const component = createComponentElement();
+    initializeComponentEvents(component);
+
+    //agregar botón par borrar componente
+    if(close){
+        const closeButton = document.createElement("button");
+        closeButton.className = "close";
+        closeButton.textContent = "";
+        closeButton.addEventListener("click", function(){
+            borrarComponente(component);
+        });
+        component.appendChild(closeButton);
+
+        const iconSvgClose = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const iconPathClose = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'path'
+        );
+        iconSvgClose.setAttribute('height', '16');
+        iconSvgClose.setAttribute('width', '16');
+        iconSvgClose.setAttribute('viewBox', '0 0 384 512');
+
+        iconPathClose.setAttribute(
+            'd',
+            'M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z'
+        );
+
+        iconSvgClose.appendChild(iconPathClose);
+        closeButton.appendChild(iconSvgClose);
+    }
+
+    const minimizeButton = document.createElement("button");
+    minimizeButton.className = "minimizar";
+    minimizeButton.textContent = "";
+    minimizeButton.id = "minimizar";
+    minimizeButton.addEventListener("click", function(){
+        minimizarComponente(component);
+    });
+
+    const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    const iconPath = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'path'
+    );
+    iconSvg.setAttribute('height', '16');
+    iconSvg.setAttribute('width', '16');
+    iconSvg.setAttribute('viewBox', '0 0 512 512');
+
+    iconPath.setAttribute(
+        'd',
+        'M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z'
+    );
+
+    iconSvg.appendChild(iconPath);
+
+    minimizeButton.appendChild(iconSvg);
+
+    component.appendChild(minimizeButton);
+
+    // Agregar el componente al DOM
+    document.body.appendChild(component);
+
+    return component
 }
 
 function minimizarComponente(componente){
@@ -613,14 +616,14 @@ function changeDiscount(){
 //Pone en order las funciones llamadas al inicio de la página
 function main(){
     // Agregar un componente inicial
-    const componenteInicial = crearComponente(false);
+    const componenteInicial = createComponent(false);
     document.getElementById("componenteInicial").appendChild(componenteInicial);
     const subini = componenteInicial.querySelector("#subtotal .subtotal");
     actualizarSubtotal(subini);
     // Escucha los evento de click en el boton + para agregar otro componente
     document.querySelector("#containerAddComponent button").addEventListener("click", function() {
         const contenedor = document.getElementById("contenedor");
-        const nuevoComponente = crearComponente();
+        const nuevoComponente = createComponent();
         contenedor.appendChild(nuevoComponente);
         calcularTotal();
         const sub = nuevoComponente.querySelector("#subtotal .subtotal");
