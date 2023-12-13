@@ -41,7 +41,9 @@ const discounts = {
     '10':12
 }
 
-let currency = "clp"
+let currency = "clp";
+
+let totalComponents = [];
 
 const componentTemplate = `
 <div>
@@ -212,34 +214,140 @@ const componentTemplate = `
 </div>
 `;
 
-class LabelUpdater {
-    constructor(input, label, comp) {
-        this.input = input;
-        this.label = label;
-        this.comp =comp
+class CalcualtorComponent {
+    constructor(flag) {
+        this.flag = flag;
+        this.create();
 
-        this.input.addEventListener('input', () => this.update());
+        this.inputVersion = this.componentCreated.querySelector("select.text-center");
+
+        this.inputStorage = this.componentCreated.querySelectorAll("input")[0];
+        this.labelStorage = this.componentCreated.querySelectorAll("#actualizar")[0];
+
+        this.inputDataBase = this.componentCreated.querySelectorAll("input")[1];
+        this.labelDataBase = this.componentCreated.querySelectorAll("#actualizar")[1];
+
+        this.inputBackup = this.componentCreated.querySelectorAll("input")[2];
+        this.labelBackup = this.componentCreated.querySelectorAll("#actualizar")[2];
+
+        this.inputPort = this.componentCreated.querySelectorAll("input")[3];
+        this.labelPort = this.componentCreated.querySelectorAll("#actualizar")[3];
+
+        this.inputRam = this.componentCreated.querySelectorAll("input")[4];
+        this.labelRam = this.componentCreated.querySelectorAll("#actualizar")[4];
+
+        this.setter();
+        this.inputVersion.addEventListener('change', () => this.updateTitle());
+        this.inputStorage.addEventListener('input', () => this.update(this.inputStorage, this.labelStorage));
+        this.inputDataBase.addEventListener('input', () => this.update(this.inputDataBase, this.labelDataBase));
+        this.inputBackup.addEventListener('input', () => this.update(this.inputBackup, this.labelBackup));
+        this.inputPort.addEventListener('input', () => this.update(this.inputPort, this.labelPort));
+        this.inputRam.addEventListener('input', () => {this.update(this.inputRam, this.labelRam);this.updateTitle()});
+
+        this.currentCurrency = currency === "clp" ? clp : usd;
     }
 
-    update() {
-        const item = this.input.getAttribute('id');
-        const unitario = Number(this.input.value);
+    create() {
+        const component = document.createElement("div");
+        component.className = "tarjeta";
+        component.id = "tarjeta";
+        component.innerHTML = componentTemplate;
+
+        //Inicializar los popovers
+        inicializarPopovers();
+
+        if(this.flag){
+            const closeButton = document.createElement("button");
+            closeButton.className = "close";
+            closeButton.textContent = "";
+            closeButton.addEventListener("click", function(){
+                borrarComponente(component);
+            });
+            component.appendChild(closeButton);
+
+            const iconSvgClose = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            const iconPathClose = document.createElementNS(
+                'http://www.w3.org/2000/svg',
+                'path'
+            );
+            iconSvgClose.setAttribute('height', '16');
+            iconSvgClose.setAttribute('width', '16');
+            iconSvgClose.setAttribute('viewBox', '0 0 384 512');
+
+            iconPathClose.setAttribute(
+                'd',
+                'M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z'
+            );
+
+            iconSvgClose.appendChild(iconPathClose);
+            closeButton.appendChild(iconSvgClose);
+        }
+
+        const minimizeButton = document.createElement("button");
+        minimizeButton.className = "minimizar";
+        minimizeButton.textContent = "";
+        minimizeButton.id = "minimizar";
+        minimizeButton.addEventListener("click", function(){
+            minimizarComponente(component);
+        });
+
+        const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const iconPath = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'path'
+        );
+        iconSvg.setAttribute('height', '16');
+        iconSvg.setAttribute('width', '16');
+        iconSvg.setAttribute('viewBox', '0 0 512 512');
+
+        iconPath.setAttribute(
+            'd',
+            'M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z'
+        );
+
+        iconSvg.appendChild(iconPath);
+
+        minimizeButton.appendChild(iconSvg);
+
+        component.appendChild(minimizeButton);
+
+        // Agregar el componente al DOM
+        document.body.appendChild(component);
+
+        let contenedor = document.getElementById("contenedor");
+        contenedor.appendChild(component);
+
+        this.componentCreated = component;
+    }
+
+    setter() {
+        this.ramOptions = currency === "clp" ? [ram[1], ram[2], ram[3]] : [ram[4], ram[5], ram[6]];
+
+        this.update(this.inputStorage, this.labelStorage);
+        this.update(this.inputDataBase, this.labelDataBase);
+        this.update(this.inputBackup, this.labelBackup);
+        this.update(this.inputPort, this.labelPort);
+        this.update(this.inputRam, this.labelRam);
+    }
+
+    update(input, label) {
+        let item = input.getAttribute('id');
+
+        const unitario = Number(input.value);
         let subtotal = 0;
-        const moneda = currency === "clp" ? clp : usd;
-        const optionsRam = currency === "clp" ? [ram[1], ram[2], ram[3]] : [ram[4], ram[5], ram[6]];
         if(item == 'ram'){
             if(unitario === 1){
-                subtotal = optionsRam[0];
+                subtotal = this.ramOptions[0];
                 subtotal = subtotal.toFixed(2);
             }
             else if(unitario < 12){
                 subtotal = unitario - 2;
-                subtotal = subtotal * optionsRam[1];
-                subtotal = optionsRam[0] - subtotal;
+                subtotal = subtotal * this.ramOptions[1];
+                subtotal = this.ramOptions[0] - subtotal;
                 subtotal = subtotal * unitario;
                 subtotal = subtotal.toFixed(2);
             }else{
-                subtotal = optionsRam[2] * unitario;
+                subtotal = this.ramOptions[2] * unitario;
                 subtotal = subtotal.toFixed(2);
             }
         } else if(true){
@@ -249,16 +357,15 @@ class LabelUpdater {
                 //aqui
             } else{
                 subtotal = unitario - base[item];
-                subtotal = subtotal * moneda[item];
-                console.log(moneda[item]);
+                subtotal = subtotal * this.currentCurrency[item];
                 subtotal = subtotal.toFixed(2);
             }
         }
         //Se actualiza la label con el valor calculado arriba
         if (currency === "clp"){
-            this.label.textContent = subtotal == 0 ? "$0" : "$" + subtotal.slice(0, -3);
+            label.textContent = subtotal == 0 ? "$0" : "$" + subtotal.slice(0, -3);
         } else {
-            this.label.textContent = subtotal == 0 ? "$0.00" : "$" + subtotal;
+            label.textContent = subtotal == 0 ? "$0.00" : "$" + subtotal;
         }
 
         this.updateSub();
@@ -266,53 +373,24 @@ class LabelUpdater {
     }
 
     updateSub() {
-        const inputs = this.comp.parentNode.parentNode.querySelectorAll("#actualizar");
+        const inputs = this.componentCreated.querySelectorAll("#actualizar");
         let subtotal = 0;
         inputs.forEach(input => {
             let content = currency === "clp" ? input.textContent.slice(1) : input.textContent.slice(1);
             subtotal += parseFloat(content);
         });
         subtotal = subtotal.toFixed(2);
-        this.comp.textContent = currency === "clp" ? 'Subtotal: $' + subtotal.slice(0,-3) : 'Subtotal: $' + subtotal;
+        this.componentCreated.querySelector("#subtotal").textContent = currency === "clp" ? 'Subtotal: $' + subtotal.slice(0,-3) : 'Subtotal: $' + subtotal;
     }
-}
 
-function actualizarEtiqueta3(input, label, sub) {
-    item = input.getAttribute('id');
-    unitario = Number(input.value);
-    subtotal = 0
-    moneda = currency === "clp" ? clp : usd
-    optionsRam = currency === "clp" ? [ram[1],ram[2],ram[3]] : [ram[4],ram[5],ram[6]];
-    if(item == 'ram'){
-        if(unitario === 1){
-            subtotal = optionsRam[0];
-            subtotal = subtotal.toFixed(2);
-        }
-        else if(unitario < 12){
-            subtotal = unitario - 2;
-            subtotal = subtotal * optionsRam[1];
-            subtotal = optionsRam[0] - subtotal;
-            subtotal = subtotal * unitario;
-            subtotal = subtotal.toFixed(2);
-        }else{
-            subtotal = optionsRam[2] * unitario;
-            subtotal = subtotal.toFixed(2);
-        }
-    } else if(true){
-        //Formula para calcular el valor de cada componente del servidor que no sea la ram
-        if(unitario <= base[item]){
-            subtotal = 0;
-            subtotal = subtotal.toFixed(2);
-        } else{
-            subtotal = unitario - base[item];
-            subtotal = subtotal * moneda[item];
-            subtotal = subtotal.toFixed(2);
-        }
-    }
-    //Se actualiza la label con el valor calculado arriba
-    label.textContent = currency === "clp" ? "$"+subtotal.slice(0,-3) : "$"+subtotal;
-    for (let i=0; i < sub.length; i++){
-        actualizarSubtotal(sub[i]);
+    updateTitle() {
+        const h2 = this.componentCreated.querySelector("h2");
+        const version = this.componentCreated.querySelector("select.text-center").options[this.componentCreated.querySelector("select.text-center").selectedIndex].value;
+        const ramInput = this.componentCreated.querySelector("#ram").value;
+        const ramTitle = this.componentCreated.querySelector("#textRam");
+
+        h2.textContent = "Servidor Minecraft " + version;
+        ramTitle.textContent = ramInput + "GB RAM";
     }
 }
 
@@ -352,130 +430,12 @@ function calcularTotal(){
     document.getElementById("totalLabel").textContent = "Precio Final: $" + total;
 }
 
-function changeLabelCurrency(){
-    const labels = document.querySelectorAll("#actualizar");
-    const inputs = document.querySelectorAll("input");
-    const subs = document.querySelectorAll("#subtotal .subtotal");
-    for (i = 0; i < inputs.length; i++){
-        actualizarEtiqueta3(inputs[i], labels[i], subs)
-    }
-}
-
 function changeCurrency(){
     currency = document.getElementById("currency").value;
-
-    changeLabelCurrency();
+    for( i = 0; i < totalComponents.length; i++) {
+        totalComponents[i].setter();
+    }
     calcularTotal();
-}
-
-function createComponentElement() {
-    const component = document.createElement("div");
-    component.className = "tarjeta";
-    component.id = "tarjeta";
-    component.innerHTML = componentTemplate;
-    return component;
-}
-
-function initializeComponentEvents(component) {
-    //Inicializar los popovers
-    inicializarPopovers();
-
-    // Configurar eventos para las etiquetas independientes de este componente
-    const inputs = component.querySelectorAll("input");
-    const labels = component.querySelectorAll("#actualizar");
-    const sub = component.querySelector("#subtotal .subtotal");
-
-    const h2 = component.querySelector("h2");
-    const ramText = component.querySelector("#textRam");
-
-    const vers = component.querySelector("select.text-center");
-    const ramInput = component.querySelector("#ram");
-
-    vers.addEventListener('change', function(){
-        let selectedOption = this.options[vers.selectedIndex];
-        actualizarH2(selectedOption.text, ramInput.value);
-    });
-
-    ramInput.addEventListener('input', function() {
-        let selectedOption = vers.options[vers.selectedIndex];
-        actualizarH2(selectedOption.text, ramInput.value);
-    });
-
-    for (let i = 0; i < inputs.length; i++) {
-        let uplab = new LabelUpdater(inputs[i], labels[i], sub)
-    }
-
-    // Función para actualizar el texto del elemento <h2>
-    function actualizarH2(version, ram) {
-        h2.textContent = "Servidor Minecraft " + version;
-        ramText.textContent = ram + "GB RAM"
-    }
-}
-
-function createComponent(close = true) {
-    const component = createComponentElement();
-    initializeComponentEvents(component);
-
-    //agregar botón par borrar componente
-    if(close){
-        const closeButton = document.createElement("button");
-        closeButton.className = "close";
-        closeButton.textContent = "";
-        closeButton.addEventListener("click", function(){
-            borrarComponente(component);
-        });
-        component.appendChild(closeButton);
-
-        const iconSvgClose = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        const iconPathClose = document.createElementNS(
-            'http://www.w3.org/2000/svg',
-            'path'
-        );
-        iconSvgClose.setAttribute('height', '16');
-        iconSvgClose.setAttribute('width', '16');
-        iconSvgClose.setAttribute('viewBox', '0 0 384 512');
-
-        iconPathClose.setAttribute(
-            'd',
-            'M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z'
-        );
-
-        iconSvgClose.appendChild(iconPathClose);
-        closeButton.appendChild(iconSvgClose);
-    }
-
-    const minimizeButton = document.createElement("button");
-    minimizeButton.className = "minimizar";
-    minimizeButton.textContent = "";
-    minimizeButton.id = "minimizar";
-    minimizeButton.addEventListener("click", function(){
-        minimizarComponente(component);
-    });
-
-    const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    const iconPath = document.createElementNS(
-        'http://www.w3.org/2000/svg',
-        'path'
-    );
-    iconSvg.setAttribute('height', '16');
-    iconSvg.setAttribute('width', '16');
-    iconSvg.setAttribute('viewBox', '0 0 512 512');
-
-    iconPath.setAttribute(
-        'd',
-        'M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z'
-    );
-
-    iconSvg.appendChild(iconPath);
-
-    minimizeButton.appendChild(iconSvg);
-
-    component.appendChild(minimizeButton);
-
-    // Agregar el componente al DOM
-    document.body.appendChild(component);
-
-    return component
 }
 
 function minimizarComponente(componente){
@@ -594,17 +554,6 @@ function downloadExcel(){
     XLSX.writeFile(wb, "calculo.xlsx")
 }
 
-function actualizarSubtotal(sub){
-    const inputs = sub.parentNode.parentNode.querySelectorAll("#actualizar");
-    let subtotal = 0;
-    inputs.forEach(function(input) {
-        let content = currency === "clp" ? input.textContent.slice(1) : input.textContent.slice(1);
-        subtotal += parseFloat(content);
-    });
-    subtotal = subtotal.toFixed(2);
-
-    sub.textContent = currency === "clp" ? 'Subtotal: $' + subtotal.slice(0,-3) : 'Subtotal: $' + subtotal;
-}
 
 function changeDiscount(){
     const discount = document.getElementById("segundodescuento").value;
@@ -616,32 +565,18 @@ function changeDiscount(){
 //Pone en order las funciones llamadas al inicio de la página
 function main(){
     // Agregar un componente inicial
-    const componenteInicial = createComponent(false);
-    document.getElementById("componenteInicial").appendChild(componenteInicial);
-    const subini = componenteInicial.querySelector("#subtotal .subtotal");
-    actualizarSubtotal(subini);
+    let initialComponent = new CalcualtorComponent(false);
+
     // Escucha los evento de click en el boton + para agregar otro componente
     document.querySelector("#containerAddComponent button").addEventListener("click", function() {
-        const contenedor = document.getElementById("contenedor");
-        const nuevoComponente = createComponent();
-        contenedor.appendChild(nuevoComponente);
-        calcularTotal();
-        const sub = nuevoComponente.querySelector("#subtotal .subtotal");
-        actualizarSubtotal(sub);
+        const nuevoComponente = new CalcualtorComponent(true);
     });
+
     // Identifica si el usuario es de chile y si es, define la moneda por defecto como clp
     Intl.DateTimeFormat().resolvedOptions().timeZone === "America/Santiago" ? null : setCurrency();
 
-    // Actualizar etiquetas al inicio para los valores bases de cada item
-    const inputs2 = document.querySelectorAll("input");
-    const labels2 = document.querySelectorAll("#actualizar");
-    const sub = document.querySelector("#subtotal .subtotal");
-    for (let i = 0; i < inputs2.length; i++) {
-        actualizarEtiqueta3(inputs2[i], labels2[i],sub);
-    }
-
     // Escucha los eventos de cambio de moneda
-    document.getElementById("currency").addEventListener("change", changeCurrency);
+    document.getElementById("currency").addEventListener("change", changeCurrency());
     // Escucha los eventos de click en el boton para descargar el excel con los valores de la calculadora
     document.getElementById("excel").addEventListener("click", downloadExcel);
     // Escucha los eventos de cambio del descuento por meses y llama al funcion changeDiscount
