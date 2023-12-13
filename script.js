@@ -214,7 +214,7 @@ const componentTemplate = `
 </div>
 `;
 
-class CalcualtorComponent {
+class CalculatorComponent {
     constructor(flag) {
         this.flag = flag;
         this.create();
@@ -565,11 +565,11 @@ function changeDiscount(){
 //Pone en order las funciones llamadas al inicio de la página
 function main(){
     // Agregar un componente inicial
-    let initialComponent = new CalcualtorComponent(false);
+    let initialComponent = new CalculatorComponent(false);
 
     // Escucha los evento de click en el boton + para agregar otro componente
     document.querySelector("#containerAddComponent button").addEventListener("click", function() {
-        const nuevoComponente = new CalcualtorComponent(true);
+        const nuevoComponente = new CalculatorComponent(true);
     });
 
     // Identifica si el usuario es de chile y si es, define la moneda por defecto como clp
