@@ -1,7 +1,7 @@
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
 const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
-//Valores de los componentes del servidor en pesos chilenos
+// Valores de los componentes del servidor en pesos chilenos
 const clp = {
     'almacenamiento': 100,
     'bd': 200,
@@ -9,7 +9,7 @@ const clp = {
     'puertos': 500,
     'ram': 1500
 }
-//Valores de los componentes del servidor en dolares
+// Valores de los componentes del servidor en dolares
 const usd = {
     'almacenamiento': 0.11,
     'bd': 0.22,
@@ -17,7 +17,7 @@ const usd = {
     'puertos': 0.56,
     'ram': 1.67
 }
-//Cantidad base de cada uno de los componentes del servidor
+// Cantidad base de cada uno de los componentes del servidor
 const base = {
     'almacenamiento': 4,
     'bd': 0,
@@ -25,7 +25,7 @@ const base = {
     'puertos': 1,
     'ram': 1
 }
-//Valores especiales de la ram
+//V alores especiales de la ram
 const ram = {
     '1':2000,//clp
     '2':50,
@@ -34,17 +34,17 @@ const ram = {
     '5':0.055,
     '6':1.67
 }
-
+// Valores para los descuentos
 const discounts = {
     '0':1,
     '4.5':3,
     '10':12
 }
-
+// Valor de la moneda actual
 let currency = "clp";
-
+// arreglo de los componentes actuales
 let totalComponents = [];
-
+// Template del componente de la calculadora
 const componentTemplate = `
 <div>
     <h2 class="p-3 display-5 display-font-3 fs-1 fw-bold">Servidor Minecraft Java Vanilla</h2>
@@ -214,6 +214,7 @@ const componentTemplate = `
 </div>
 `;
 
+// Clase principal de la calculadora
 class CalculatorComponent {
     constructor(flag) {
         this.flag = flag;
@@ -236,6 +237,9 @@ class CalculatorComponent {
         this.inputRam = this.componentCreated.querySelectorAll("input")[4];
         this.labelRam = this.componentCreated.querySelectorAll("#actualizar")[4];
 
+        this.minimizerButton = this.componentCreated.querySelector("#minimizar");
+        this.closeButton = this.componentCreated.querySelector("#close");
+
         this.setter();
         this.inputVersion.addEventListener('change', () => this.updateTitle());
         this.inputStorage.addEventListener('input', () => this.update(this.inputStorage, this.labelStorage));
@@ -243,10 +247,15 @@ class CalculatorComponent {
         this.inputBackup.addEventListener('input', () => this.update(this.inputBackup, this.labelBackup));
         this.inputPort.addEventListener('input', () => this.update(this.inputPort, this.labelPort));
         this.inputRam.addEventListener('input', () => {this.update(this.inputRam, this.labelRam);this.updateTitle()});
+        this.minimizerButton.addEventListener('click', () => this.minimizer());
+
+        if(this.flag) {
+            this.closeButton.addEventListener('click', () => this.close());
+        }
 
         this.currentCurrency = currency === "clp" ? clp : usd;
     }
-
+    // Función que crea el componente en html
     create() {
         const component = document.createElement("div");
         component.className = "tarjeta";
@@ -259,13 +268,13 @@ class CalculatorComponent {
         if(this.flag){
             const closeButton = document.createElement("button");
             closeButton.className = "close";
+            closeButton.id = "close"
             closeButton.textContent = "";
-            closeButton.addEventListener("click", function(){
-                borrarComponente(component);
-            });
             component.appendChild(closeButton);
 
-            const iconSvgClose = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            const iconSvgClose = document.createElementNS(
+                'http://www.w3.org/2000/svg',
+                'svg');
             const iconPathClose = document.createElementNS(
                 'http://www.w3.org/2000/svg',
                 'path'
@@ -285,11 +294,8 @@ class CalculatorComponent {
 
         const minimizeButton = document.createElement("button");
         minimizeButton.className = "minimizar";
-        minimizeButton.textContent = "";
         minimizeButton.id = "minimizar";
-        minimizeButton.addEventListener("click", function(){
-            minimizarComponente(component);
-        });
+        minimizeButton.textContent = "";
 
         const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         const iconPath = document.createElementNS(
@@ -319,7 +325,7 @@ class CalculatorComponent {
 
         this.componentCreated = component;
     }
-
+    // Función que establece valores iniciales del componente y realiza una actualización de los elementos de este
     setter() {
         this.ramOptions = currency === "clp" ? [ram[1], ram[2], ram[3]] : [ram[4], ram[5], ram[6]];
 
@@ -329,7 +335,7 @@ class CalculatorComponent {
         this.update(this.inputPort, this.labelPort);
         this.update(this.inputRam, this.labelRam);
     }
-
+    // Función para actualizar la label que acompaña al input del componente
     update(input, label) {
         let item = input.getAttribute('id');
 
@@ -371,7 +377,7 @@ class CalculatorComponent {
         this.updateSub();
         calcularTotal();
     }
-
+    // Función para actualizar el subtotal del componente
     updateSub() {
         const inputs = this.componentCreated.querySelectorAll("#actualizar");
         let subtotal = 0;
@@ -382,7 +388,7 @@ class CalculatorComponent {
         subtotal = subtotal.toFixed(2);
         this.componentCreated.querySelector("#subtotal").textContent = currency === "clp" ? 'Subtotal: $' + subtotal.slice(0,-3) : 'Subtotal: $' + subtotal;
     }
-
+    // Función para actualizar el título del componente en relacion al input de versiones y ram
     updateTitle() {
         const h2 = this.componentCreated.querySelector("h2");
         const version = this.componentCreated.querySelector("select.text-center").options[this.componentCreated.querySelector("select.text-center").selectedIndex].value;
@@ -391,6 +397,35 @@ class CalculatorComponent {
 
         h2.textContent = "Servidor Minecraft " + version;
         ramTitle.textContent = ramInput + "GB RAM";
+    }
+    // Función que minimiza el componente
+    minimizer() {
+        let targets = this.componentCreated.querySelectorAll("#etiquetas");
+        let hr = this.componentCreated.querySelector("hr");
+        let icon = this.componentCreated.querySelector("#minimizar svg path");
+
+        targets.forEach(function(target) {
+            if(target.style.display === "none"){
+                target.style.display = "block";
+                hr.style.display = "block";
+                icon.setAttribute(
+                    'd',
+                    'M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z'
+                );
+            } else {
+                target.style.display = "none";
+                hr.style.display = "none";
+                icon.setAttribute(
+                    'd',
+                    'M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'
+                );
+            }
+        });
+    }
+    // Función que elimina al componente
+    close() {
+        this.componentCreated.remove();
+        calcularTotal();
     }
 }
 
@@ -430,6 +465,7 @@ function calcularTotal(){
     document.getElementById("totalLabel").textContent = "Precio Final: $" + total;
 }
 
+// Función que cambia el tipo de moneda de los valores de los componentes
 function changeCurrency(){
     currency = document.getElementById("currency").value;
     for( i = 0; i < totalComponents.length; i++) {
@@ -438,33 +474,7 @@ function changeCurrency(){
     calcularTotal();
 }
 
-function minimizarComponente(componente){
-    let targets = componente.querySelectorAll("#etiquetas");
-    let hr = componente.querySelector("hr");
-    let icon = componente.querySelector("#minimizar svg path");
-
-    targets.forEach(function(target) {
-        if(target.style.display === "none"){
-            target.style.display = "block";
-            hr.style.display = "block";
-            icon.setAttribute(
-                'd',
-                'M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z'
-            );
-        } else {
-            target.style.display = "none";
-            hr.style.display = "none";
-            icon.setAttribute(
-                'd',
-                'M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'
-            );
-        }
-    });
-
-
-}
-
-// Funcion para inicializar los popovers
+// Función para inicializar los popovers
 function inicializarPopovers() {
     // Obtener todos los elementos con la clase icon-info-sign
     const iconosInfo = document.querySelectorAll('#iconInfo');
@@ -481,13 +491,7 @@ function inicializarPopovers() {
     });
 }
 
-//Borrar componente
-function borrarComponente(componente){
-    componente.remove();
-    calcularTotal();
-}
-
-// funcion para establecer la moneda seleccionada al principio del ingreso a la página
+// Función para establecer la moneda seleccionada al principio del ingreso a la página
 function setCurrency(){
     chileanPesos = document.getElementById("clp");
     dollar = document.getElementById("usd");
@@ -496,6 +500,7 @@ function setCurrency(){
     currency="usd";
 }
 
+// Función para crear un excel con los datos de la calculadora y descargarlo
 function downloadExcel(){
     const opt = document.querySelectorAll("#ante .text-center")
     comps = opt.length;
@@ -554,7 +559,7 @@ function downloadExcel(){
     XLSX.writeFile(wb, "calculo.xlsx")
 }
 
-
+// Función para cambiar la etiqueta de descuento
 function changeDiscount(){
     const discount = document.getElementById("segundodescuento").value;
     const labelChange = document.getElementById("changeDiscount");
@@ -566,22 +571,20 @@ function changeDiscount(){
 function main(){
     // Agregar un componente inicial
     let initialComponent = new CalculatorComponent(false);
-
-    // Escucha los evento de click en el boton + para agregar otro componente
+    totalComponents.push(initialComponent);
+    // Escucha los evento de click en el boton agregar otro componente
     document.querySelector("#containerAddComponent button").addEventListener("click", function() {
         const nuevoComponente = new CalculatorComponent(true);
+        totalComponents.push(nuevoComponente);
     });
-
     // Identifica si el usuario es de chile y si es, define la moneda por defecto como clp
     Intl.DateTimeFormat().resolvedOptions().timeZone === "America/Santiago" ? null : setCurrency();
-
     // Escucha los eventos de cambio de moneda
-    document.getElementById("currency").addEventListener("change", changeCurrency());
+    document.getElementById("currency").addEventListener("change", changeCurrency);
     // Escucha los eventos de click en el boton para descargar el excel con los valores de la calculadora
     document.getElementById("excel").addEventListener("click", downloadExcel);
     // Escucha los eventos de cambio del descuento por meses y llama al funcion changeDiscount
     document.getElementById("segundodescuento").addEventListener("change", changeDiscount);
-
     calcularTotal();
 }
 
