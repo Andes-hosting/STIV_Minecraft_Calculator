@@ -263,7 +263,7 @@ class CalculatorComponent {
         component.innerHTML = componentTemplate;
 
         //Inicializar los popovers
-        inicializarPopovers();
+        inicializarPopovers(component);
 
         if(this.flag){
             const closeButton = document.createElement("button");
@@ -475,9 +475,9 @@ function changeCurrency(){
 }
 
 // Función para inicializar los popovers
-function inicializarPopovers() {
+function inicializarPopovers(component) {
     // Obtener todos los elementos con la clase icon-info-sign
-    const iconosInfo = document.querySelectorAll('#iconInfo');
+    const iconosInfo = component.querySelectorAll('#iconInfo');
 
     // Iterar sobre cada elemento y aplicar la inicialización del popover
     iconosInfo.forEach((icono) => {
