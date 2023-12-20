@@ -260,7 +260,7 @@ class CalculatorComponent {
         const component = document.createElement("div");
         component.className = "tarjeta";
         component.id = "tarjeta";
-        component.innerHTML = componentTemplate;
+        component.insertAdjacentHTML("beforeend", componentTemplate);
 
         //Inicializar los popovers
         inicializarPopovers(component);
@@ -328,6 +328,7 @@ class CalculatorComponent {
     // Función que establece valores iniciales del componente y realiza una actualización de los elementos de este
     setter() {
         this.ramOptions = currency === "clp" ? [ram[1], ram[2], ram[3]] : [ram[4], ram[5], ram[6]];
+        this.currentCurrency = currency === "clp" ? clp : usd;
 
         this.update(this.inputStorage, this.labelStorage);
         this.update(this.inputDataBase, this.labelDataBase);
@@ -468,6 +469,7 @@ function calcularTotal(){
 // Función que cambia el tipo de moneda de los valores de los componentes
 function changeCurrency(){
     currency = document.getElementById("currency").value;
+    console.log(currency);
     for( i = 0; i < totalComponents.length; i++) {
         totalComponents[i].setter();
     }
